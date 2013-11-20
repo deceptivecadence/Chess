@@ -9,17 +9,17 @@ import java.net.URLConnection;
 import org.json.JSONObject;
 
 public class URLSendReceive {
-	String gameID = "344";
-	String teamNumber = "1";
-	String teamSecret = "32c68cae";
-	String moveString = "";
+	String gameID = "345";
+	//String teamNumber = "1";
+	//String teamSecret = "32c68cae";
+	String teamNumber  ="2";
+	String teamSecret = "1a77594c";
 	
-	String pollURL = String.format("http://www.bencarle.com/chess/poll/%s/%s/%s/",gameID,teamNumber,teamSecret);
-	String moveURL = String.format("http://www.bencarle.com/chess/move/%s/%s/%s/%s/",gameID,teamNumber,teamSecret,moveString);
 	
-	public String urlReceive(){
+	String pollURL = String.format("http://www.bencarle.com/chess/poll/%s/%s/%s/",gameID,teamNumber,teamSecret);	
+	public String urlReceive(String inUrl){
 		try {
-			URL url = new URL(pollURL);
+			URL url = new URL(inUrl);
 			URLConnection urlConnection = url.openConnection();
 			//urlConnection.connect();
 			
@@ -27,23 +27,14 @@ public class URLSendReceive {
 			JSONObject json = new JSONObject(toJSONString(in));
 			return json.toString();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return "";
-	}
-	
-	public boolean urlSend(String move){
-		this.moveString = move;
-		try {
-			URL url = new URL(moveURL);
-			URLConnection connection = url.openConnection();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return "Need to wait longer";
 		}
 		
-		return false;
+	}
+	
+	public String urlSend(String move){
+		String moveURL = String.format("http://www.bencarle.com/chess/move/%s/%s/%s/%s/",gameID,teamNumber,teamSecret,move);
+		return this.urlReceive(moveURL);
 	}
 	
 	private static String toJSONString(Reader rd) throws IOException {
@@ -58,7 +49,8 @@ public class URLSendReceive {
 	
 	public static void main(String[] args) {
 		URLSendReceive test = new URLSendReceive();
-		System.out.println(test.urlReceive());
+		System.out.println(test.urlReceive(test.pollURL));
+		System.out.println(test.urlSend("Nc6d4"));
 		
 	}
 	
