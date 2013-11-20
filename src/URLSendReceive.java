@@ -35,11 +35,11 @@ public class URLSendReceive {
 		return this.urlReceive(moveURL);
 	}
 	
-	private static String toJSONString(Reader rd) throws IOException {
+	private static String toJSONString(BufferedReader br) throws IOException {
 	    StringBuilder sb = new StringBuilder();
-	    int cp;
-	    while ((cp = rd.read()) != -1) {
-	      sb.append((char) cp);
+	    int intChar;
+	    while ((intChar = br.read()) != -1) {
+	      sb.append((char) intChar);
 	    }
 	    return sb.toString();
 	  }
