@@ -21,13 +21,11 @@ public class URLSendReceive {
 		try {
 			URL url = new URL(inUrl);
 			URLConnection urlConnection = url.openConnection();
-			//urlConnection.connect();
-			
 			BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 			JSONObject json = new JSONObject(toJSONString(in));
 			return json.toString();
 		} catch (IOException e) {
-			return "Need to wait longer";
+			return "Not our move or game over";
 		}
 		
 	}
