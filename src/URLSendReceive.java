@@ -1,8 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Reader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -16,7 +14,7 @@ public class URLSendReceive {
 	String teamSecret = "1a77594c";
 	
 	
-	String pollURL = String.format("http://www.bencarle.com/chess/poll/%s/%s/%s/",gameID,teamNumber,teamSecret);	
+	String pollURL = String.format("http://www.bencarle.com/chess/poll/%s/%s/%s/",this.gameID,this.teamNumber,this.teamSecret);	
 	public String urlReceive(String inUrl){
 		try {
 			URL url = new URL(inUrl);
@@ -31,7 +29,7 @@ public class URLSendReceive {
 	}
 	
 	public String urlSend(String move){
-		String moveURL = String.format("http://www.bencarle.com/chess/move/%s/%s/%s/%s/",gameID,teamNumber,teamSecret,move);
+		String moveURL = String.format("http://www.bencarle.com/chess/move/%s/%s/%s/%s/",this.gameID,this.teamNumber,this.teamSecret,move);
 		return this.urlReceive(moveURL);
 	}
 	
