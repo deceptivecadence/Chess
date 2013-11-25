@@ -1,5 +1,7 @@
 import java.util.Date;
 
+import org.json.JSONObject;
+
 
 public class Run {
 
@@ -13,14 +15,14 @@ public class Run {
 		while (true) {
 			Date currentTime = new Date();
 			if (currentTime.getTime() - time.getTime() >= pingRate) {
-				JSONObject json = butler.urlReceive();
-				if (json.get("ready")) {
+				JSONObject json = butler.urlReceive(butler.pollURL);
+				if (json.get("ready").toString() == "true") {
 					//do a move
 				}
 				
 				time = new Date();
-				System.out.println("Polled at " + time ". ");
-				if (json.get("ready"))
+				System.out.println("Polled at " + time + ". ");
+				if (json.get("ready").toString() == "true")
 					System.out.print("Made a move.");
 			}
 		}

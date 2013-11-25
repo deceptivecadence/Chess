@@ -23,12 +23,12 @@ public class URLSendReceive {
 			JSONObject json = new JSONObject(toJSONString(in));
 			return json;
 		} catch (IOException e) {
-			return "Not our move or game over";
+			return new JSONObject();
 		}
 		
 	}
 	
-	public String urlSend(String move){
+	public JSONObject urlSend(String move){
 		String moveURL = String.format("http://www.bencarle.com/chess/move/%s/%s/%s/%s/",this.gameID,this.teamNumber,this.teamSecret,move);
 		return this.urlReceive(moveURL);
 	}
