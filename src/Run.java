@@ -1,3 +1,5 @@
+import java.util.Date;
+
 
 public class Run {
 
@@ -10,7 +12,7 @@ public class Run {
 		
 		while (true) {
 			Date currentTime = new Date();
-			if (currentTime.UTC() - time.UTC() >= pingRate) {
+			if (currentTime.getTime() - time.getTime() >= pingRate) {
 				//do a move
 				time = new Date();
 				System.out.println("We made a move at " + time);
