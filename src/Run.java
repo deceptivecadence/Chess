@@ -14,23 +14,24 @@ public class Run {
 		
 		while (true) {
 			Date currentTime = new Date();
-			int secondsLeft = 0;
+			float secondsLeft = 0;
 			int lastMoveNumber = 0;
 			String lastMove = "";
 			
 			if (currentTime.getTime() - time.getTime() >= pingRate) {
 				JSONObject json = butler.urlReceive(butler.pollURL);
 				if (json.get("ready").toString() == "true") {
-					secondsLeft = json.get("secondsleft").parseInt();
-					lastMoveNumber = json.get("lastmovenumber").parseInt();
-					lastMove = json.get("lastmove");
+					secondsLeft = Float.parseFloat(json.get("secondsleft").toString());
+					lastMoveNumber = Integer.parseInt(json.get("lastmovenumber").toString());
+					lastMove = json.get("lastmove").toString();
 					//do a move
 				}
 				
 				time = new Date();
 				System.out.println("Polled at " + time + ". ");
-				if (json.get("ready").toString() == "true")
+				if (json.get("ready").toString() == "true"){
 					System.out.print("Made a move.");
+				}
 			}
 		}
 	}
