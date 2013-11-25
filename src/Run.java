@@ -1,3 +1,5 @@
+import java.util.Date;
+
 
 public class Run {
 
@@ -10,10 +12,10 @@ public class Run {
 		
 		while (true) {
 			Date currentTime = new Date();
-			if (currentTime.UTC() - time.UTC() >= pingRate) {
+			if (currentTime.getTime() - time.getTime() >= pingRate) {
 				JSONObject json = butler.urlReceive();
 				if (json.get("ready")) {
-				//do a move
+					//do a move
 				}
 				
 				time = new Date();
