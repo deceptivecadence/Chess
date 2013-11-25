@@ -49,6 +49,11 @@ public class Board {
 			}
 		}
 	}
+	//move will be PieceFrom(Col1Row1)To(Col2Row2)
+	public Boolean makeMove(String move){
+		
+	}
+	
 	@Override
 	public String toString(){
 		String output = "";
