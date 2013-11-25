@@ -14,9 +14,16 @@ public class Run {
 		
 		while (true) {
 			Date currentTime = new Date();
+			int secondsLeft = 0;
+			int lastMoveNumber = 0;
+			String lastMove = "";
+			
 			if (currentTime.getTime() - time.getTime() >= pingRate) {
 				JSONObject json = butler.urlReceive(butler.pollURL);
 				if (json.get("ready").toString() == "true") {
+					secondsLeft = json.get("secondsleft").parseInt();
+					lastMoveNumber = json.get("lastmovenumber").parseInt();
+					lastMove = json.get("lastmove");
 					//do a move
 				}
 				
