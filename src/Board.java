@@ -102,6 +102,17 @@ public class Board {
 		return false;
 	}
 	
+	public Board flipBoard() {
+		Board newBoard = new Board();
+		for (int i = 0; i < 8; i += 1) {
+			for (int j = 0; j < 8; j += 1) {
+				newBoard.board[8-i][8-j] = this.board[i][j];
+			}
+		}
+		
+		return newBoard;
+	}
+	
 	@Override
 	public String toString(){
 		String output = "";
