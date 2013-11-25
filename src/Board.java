@@ -36,18 +36,18 @@ public class Board {
 		for(byte j=6; j<8; j++){
 			if(j==6){
 				for(byte k=0; k<8; k++){
-					board[j][k] = P;
+					board[j][k] = (byte) (P + 10);
 				}
 			}
 			else{
-				board[j][0] = R;
-				board[j][1] = N;
-				board[j][2] = B;
-				board[j][3] = Q;
-				board[j][4] = K;
-				board[j][5] = B;
-				board[j][6] = N;
-				board[j][7] = R;
+				board[j][0] = (byte) (R + 10);
+				board[j][1] = (byte) (N + 10);
+				board[j][2] = (byte) (B + 10);
+				board[j][3] = (byte) (Q + 10);
+				board[j][4] = (byte) (K + 10);
+				board[j][5] = (byte) (B + 10);
+				board[j][6] = (byte) (N + 10);
+				board[j][7] = (byte) (R + 10);
 				
 			}
 		}
@@ -56,7 +56,7 @@ public class Board {
 	public Boolean move(String piece, String from, String to){
 		int intPiece = -1;
 		int intFrom  = -1;
-		int inTo     = -1;
+		int intTo    = -1;
 		switch(piece){
 			case "K": intPiece = 6; break;
 			case "Q": intPiece = 5; break;
@@ -67,23 +67,25 @@ public class Board {
 		}
 		
 		switch(from.substring(0, 1)){
-			case "a": intPiece = 6; break;
-			case "b": intPiece = 5; break;
-			case "c": intPiece = 4; break;
-			case "d": intPiece = 3; break;
-			case "e": intPiece = 2; break;
-			case "f": intPiece = 1; break;
-			case "g": intPiece = 1; break;
-			case "h": intPiece = 1; break;
+			case "a": intFrom = 0; break;
+			case "b": intFrom = 1; break;
+			case "c": intFrom = 2; break;
+			case "d": intFrom = 3; break;
+			case "e": intFrom = 4; break;
+			case "f": intFrom = 5; break;
+			case "g": intFrom = 6; break;
+			case "h": intFrom = 7; break;
 		}
 		
-		switch(piece){
-			case "K": intPiece = 6; break;
-			case "Q": intPiece = 5; break;
-			case "R": intPiece = 4; break;
-			case "B": intPiece = 3; break;
-			case "N": intPiece = 2; break;
-			case "P": intPiece = 1; break;
+		switch(to.substring(0, 1)){
+			case "a": intTo = 0; break;
+			case "b": intTo = 1; break;
+			case "c": intTo = 2; break;
+			case "d": intTo = 3; break;
+			case "e": intTo = 4; break;
+			case "f": intTo = 5; break;
+			case "g": intTo = 6; break;
+			case "h": intTo = 7; break;
 		}
 		return false;
 	}
