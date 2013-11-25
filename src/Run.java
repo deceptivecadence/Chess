@@ -11,9 +11,15 @@ public class Run {
 		while (true) {
 			Date currentTime = new Date();
 			if (currentTime.UTC() - time.UTC() >= pingRate) {
+				JSONObject json = butler.urlReceive();
+				if (json.get("ready")) {
 				//do a move
+				}
+				
 				time = new Date();
-				System.out.println("We made a move at " + time);
+				System.out.println("Polled at " + time ". ");
+				if (json.get("ready"))
+					System.out.print("Made a move.");
 			}
 		}
 	}

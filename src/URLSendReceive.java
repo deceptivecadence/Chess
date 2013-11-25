@@ -15,13 +15,13 @@ public class URLSendReceive {
 	
 	
 	String pollURL = String.format("http://www.bencarle.com/chess/poll/%s/%s/%s/",this.gameID,this.teamNumber,this.teamSecret);	
-	public String urlReceive(String inUrl){
+	public JSONObject urlReceive(String inUrl){
 		try {
 			URL url = new URL(inUrl);
 			URLConnection urlConnection = url.openConnection();
 			BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 			JSONObject json = new JSONObject(toJSONString(in));
-			return json.toString();
+			return json;
 		} catch (IOException e) {
 			return "Not our move or game over";
 		}
