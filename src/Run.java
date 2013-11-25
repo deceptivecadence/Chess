@@ -9,6 +9,7 @@ public class Run {
 		int pingRate = 1000;
 		Board b = new Board();
 		System.out.println(b.toString());
+		System.out.println(b.flipBoard().toString());
 		URLSendReceive butler = new URLSendReceive();
 		Date time = new Date();
 		
