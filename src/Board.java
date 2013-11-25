@@ -1,5 +1,7 @@
 import java.util.Arrays;
 
+import org.json.JSONArray;
+
 public class Board {
 	private byte K = 6;
 	private byte Q = 5;
@@ -8,7 +10,8 @@ public class Board {
 	private byte N = 2;
 	private byte P = 1;
 	public byte[][] board = new byte[8][8];
-
+	//JSONArray pieceMapping = new JSONArray();
+			
 	public Board(){
 		//Set up top row
 		for(byte i=0; i<2; i++){
@@ -49,8 +52,53 @@ public class Board {
 			}
 		}
 	}
-	//move will be PieceFrom(Col1Row1)To(Col2Row2)
-	public Boolean makeMove(String move){
+	
+	public Boolean move(String piece, String from, String to){
+		int intPiece = -1;
+		int intFrom  = -1;
+		int inTo     = -1;
+		switch(piece){
+			case "K": intPiece = 6; break;
+			case "Q": intPiece = 5; break;
+			case "R": intPiece = 4; break;
+			case "B": intPiece = 3; break;
+			case "N": intPiece = 2; break;
+			case "P": intPiece = 1; break;
+		}
+		
+		switch(from.substring(0, 1)){
+			case "a": intPiece = 6; break;
+			case "b": intPiece = 5; break;
+			case "c": intPiece = 4; break;
+			case "d": intPiece = 3; break;
+			case "e": intPiece = 2; break;
+			case "f": intPiece = 1; break;
+			case "g": intPiece = 1; break;
+			case "h": intPiece = 1; break;
+		}
+		
+		switch(piece){
+			case "K": intPiece = 6; break;
+			case "Q": intPiece = 5; break;
+			case "R": intPiece = 4; break;
+			case "B": intPiece = 3; break;
+			case "N": intPiece = 2; break;
+			case "P": intPiece = 1; break;
+		}
+		return false;
+	}
+	//move will be PieceFrom(Col1Row1)To(Col2Row2)[promotion]
+	public Boolean moveFromInput(String move){
+		String piece = "";
+		String from = "";
+		String to = "";
+		String optional = "";
+		//single piece move
+		if (move.length() == 5){
+			piece = move.substring(0, 1);
+			from = move.substring(1, 3);
+			to = move.substring(3,5);
+		}
 		return false;
 	}
 	
