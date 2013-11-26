@@ -53,41 +53,37 @@ public class Board {
 		}
 	}
 	
-	public Boolean move(String piece, String from, String to){
-		int intPiece = -1;
-		int intFrom  = -1;
-		int intTo    = -1;
-		switch(piece){
-			case "K": intPiece = 6; break;
-			case "Q": intPiece = 5; break;
-			case "R": intPiece = 4; break;
-			case "B": intPiece = 3; break;
-			case "N": intPiece = 2; break;
-			case "P": intPiece = 1; break;
-		}
+	public void move(String from, String to){
+		byte byteFromCol  = -1;
+		byte byteToCol    = -1;
 		
+		byte byteFromRow   = (byte) (8 - Integer.parseInt(from.substring(1, 2)));
+		byte byteToRow     = (byte) (8 - Integer.parseInt(to.substring(1, 2)));;
 		switch(from.substring(0, 1)){
-			case "a": intFrom = 0; break;
-			case "b": intFrom = 1; break;
-			case "c": intFrom = 2; break;
-			case "d": intFrom = 3; break;
-			case "e": intFrom = 4; break;
-			case "f": intFrom = 5; break;
-			case "g": intFrom = 6; break;
-			case "h": intFrom = 7; break;
+			case "a": byteFromCol = 0; break;
+			case "b": byteFromCol = 1; break;
+			case "c": byteFromCol = 2; break;
+			case "d": byteFromCol = 3; break;
+			case "e": byteFromCol = 4; break;
+			case "f": byteFromCol = 5; break;
+			case "g": byteFromCol = 6; break;
+			case "h": byteFromCol = 7; break;
 		}
 		
 		switch(to.substring(0, 1)){
-			case "a": intTo = 0; break;
-			case "b": intTo = 1; break;
-			case "c": intTo = 2; break;
-			case "d": intTo = 3; break;
-			case "e": intTo = 4; break;
-			case "f": intTo = 5; break;
-			case "g": intTo = 6; break;
-			case "h": intTo = 7; break;
+			case "a": byteToCol = 0; break;
+			case "b": byteToCol = 1; break;
+			case "c": byteToCol = 2; break;
+			case "d": byteToCol = 3; break;
+			case "e": byteToCol = 4; break;
+			case "f": byteToCol = 5; break;
+			case "g": byteToCol = 6; break;
+			case "h": byteToCol = 7; break;
 		}
-		return false;
+		
+		byte piece = this.board[byteFromRow][byteFromCol];
+		this.board[byteFromRow][byteFromCol] = 0;
+		this.board[byteToRow][byteToCol] = piece;
 	}
 	//move will be PieceFrom(Col1Row1)To(Col2Row2)[promotion]
 	public Boolean moveFromInput(String move){
@@ -100,6 +96,7 @@ public class Board {
 			piece = move.substring(0, 1);
 			from = move.substring(1, 3);
 			to = move.substring(3,5);
+			this.move(from, to);
 		}
 		return false;
 	}
