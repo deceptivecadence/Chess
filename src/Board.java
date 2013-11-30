@@ -9,6 +9,13 @@ public class Board {
 	private byte B = 3;
 	private byte N = 2;
 	private byte P = 1;
+	
+	private byte bK = 6 + 10;
+	private byte bQ = 5 + 10;
+	private byte bR = 4 + 10;
+	private byte bB = 3 + 10;
+	private byte bN = 2 + 10;
+	private byte bP = 1 + 10;
 	public byte[][] board = new byte[8][8];
 	//JSONArray pieceMapping = new JSONArray();
 			
@@ -40,14 +47,14 @@ public class Board {
 				}
 			}
 			else{
-				board[j][0] = (byte) (R + 10);
-				board[j][1] = (byte) (N + 10);
-				board[j][2] = (byte) (B + 10);
-				board[j][3] = (byte) (Q + 10);
-				board[j][4] = (byte) (K + 10);
-				board[j][5] = (byte) (B + 10);
-				board[j][6] = (byte) (N + 10);
-				board[j][7] = (byte) (R + 10);
+				board[j][0] = bR;
+				board[j][1] = bN;
+				board[j][2] = bB;
+				board[j][3] = bQ;
+				board[j][4] = bK;
+				board[j][5] = bB;
+				board[j][6] = bN;
+				board[j][7] = bR;
 				
 			}
 		}
@@ -85,6 +92,37 @@ public class Board {
 		this.board[byteFromRow][byteFromCol] = 0;
 		this.board[byteToRow][byteToCol] = piece;
 	}
+	
+	public void moveKing(){
+		byte moveNumber = 1;
+		for (byte i=0; i<8; i++){
+			for (byte j=0; j<8; j++){//search entire board
+				if(this.board[i][j] == K||this.board[i][j] == bK){
+					for(byte k=1; k<=moveNumber; k++){//need to use this
+						byte operation = (byte) (-1*k);
+						for(byte x=0; x<3; x++){
+							byte operation2 = (byte) (-1*k);
+							for(byte y=0; y<3; y++){
+								try{
+									if (this.board[i + operation][j + operation2] == 0){
+										this.board[i + operation][j + operation2] = this.board[i][j];
+										this.board[i][j] = 0;
+										System.out.println(this.toString());
+									}
+									//add board to "frontier" or wat do
+								}catch(IndexOutOfBoundsException e){
+									System.out.println("You dun fugged up");
+								}
+								operation2 += 1;
+							}
+							operation += 1;
+						}
+					}
+				}
+			}
+		}
+	}
+	
 	//move will be PieceFrom(Col1Row1)To(Col2Row2)[promotion]
 	public Boolean moveFromInput(String move){
 		String piece = "";
