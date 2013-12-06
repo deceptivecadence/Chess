@@ -34,7 +34,7 @@ public class Board {
 			}
 			else{
 				for(byte j=0; j<8; j++){
-					board[i][j] = P;
+					board[i][j] = Q;
 				}
 			}
 		}
@@ -105,9 +105,10 @@ public class Board {
 							for(byte y=0; y<3; y++){
 								try{
 									if (this.board[i + operation][j + operation2] == 0){
-										this.board[i + operation][j + operation2] = this.board[i][j];
-										this.board[i][j] = 0;
-										System.out.println(this.toString());
+										Board board2 = new Board();
+										board2.board[i + operation][j + operation2] = board2.board[i][j];
+										board2.board[i][j] = 0;
+										System.out.println(board2.toString());
 									}
 									//add board to "frontier" or wat do
 								}catch(IndexOutOfBoundsException e){
@@ -125,28 +126,34 @@ public class Board {
 	
 	
 	public void moveQueens(){
-		byte moveNumber = 8;
+		byte moveNumber = 7;//0-7
 		byte boundsCounter = 0;
-		byte[][] bounds = new byte[1][8];
+		byte[][] bounds = new byte[1][64];
 		for (byte i=0; i<8; i++){
 			for (byte j=0; j<8; j++){//search entire board
 				if(this.board[i][j] == Q||this.board[i][j] == bQ){
-					for(byte k=1; k<=moveNumber; k++){//need to use this
-						byte operation = (byte) (-1*k);
+					for(byte k=1; k<=moveNumber; k++){//degree of movement (spaces away from original spot)
+						byte operationX = (byte) (-1*k);
 						for(byte x=0; x<3; x++){
-							byte operation2 = (byte) (-1*k);
+							byte operationY = (byte) (-1*k);
 							for(byte y=0; y<3; y++){
 								try{
-									if (this.board[i + operation][j + operation2] != 0){
+									if (this.board[i + operationY][j + operationX] != 0){
 										//this square is as far as you can go
-										bounds[boundsCounter] = new byte[]{(byte) (i + operation),(byte) (j + operation2)};
+										bounds[boundsCounter] = new byte[]{(byte) (i + operationY),(byte) (j + operationX)};
 									}
 									else{
 										for (byte[] bound : bounds){
-											if(bound[0] < (i + operation) && bound[1] < (byte) (j + operation2)){
-												this.board[i + operation][j + operation2] = Q;
-												this.board[i][j] = 0;
-												System.out.println(this.toString());
+											if(check(operationY, j, operationX, i, bound)){
+												Board board2 = new Board();
+												board2.board[i + operationY][j + operationX] = board2.board[i][j];
+												board2.board[i][j] = 0;
+												System.out.println(board2.toString());
+												System.out.print(j);
+												System.out.print(" +"+operationX);
+												System.out.print(", "+i);
+												System.out.println(" +"+operationY);
+												System.out.println(Arrays.deepToString(bounds));
 											}
 										}
 									}
@@ -154,12 +161,67 @@ public class Board {
 								}catch(IndexOutOfBoundsException e){
 									System.out.println("You dun fugged up");
 								}
-								operation2 += 1;
+								operationY += (1*k);
 							}
-							operation += 1;
+							operationX += (1*k);
 						}
 					}
 				}
+			}
+		}
+	}
+	/**
+	 * Checks if piece can move to the location
+	 * @param oprX -  + or - or 0 modifier for the x direction
+	 * @param x - current x coord
+	 * @param opr2-  + or - or 0 modifier for the y direction
+	 * @param y - current y coord
+	 * @param bound - coords of where other piece is found [1,5] = (1,5)
+	 * @return - true if move is valid
+	 */
+	public boolean check(byte oprX, byte x, byte oprY, byte y,byte[] bound){
+		//x is decreasing
+		if(oprX<0){
+			//y is decreasing
+			if(oprY<0){
+				return bound[0] <= (x + oprX) && bound[1] <= (byte) (y + oprY);
+			}
+			//y is increasing
+			else if(oprY>0){
+				return bound[0] <= (x + oprX) && bound[1] >= (byte) (y + oprY);
+			}
+			//y isn't changing
+			else{
+				return bound[0] <= (x + oprX);
+			}
+		}
+		//x is increasing
+		else if(oprX>0){
+			//y is decreasing
+			if(oprY<0){
+				return bound[0] >= (x + oprX) && bound[1] <= (byte) (y + oprY);
+			}
+			//y is increasing
+			else if(oprY>0){
+				return bound[0] >= (x + oprX) && bound[1] >= (byte) (y + oprY);
+			}
+			//y isn't changing
+			else{
+				return bound[1] <= (byte) (y + oprY);
+			}
+		}
+		//x isn't changing
+		else{
+			//y is decreasing
+			if(oprY<0){
+				return bound[1] <= (byte) (y + oprY);
+			}
+			//y is increasing
+			else if(oprY>0){
+				return bound[1] >= (byte) (y + oprY);
+			}
+			else{
+				return true;
 			}
 		}
 	}
