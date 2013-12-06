@@ -93,7 +93,7 @@ public class Board {
 		this.board[byteToRow][byteToCol] = piece;
 	}
 	
-	public void moveKing(){
+	public void moveKings(){
 		byte moveNumber = 1;
 		for (byte i=0; i<8; i++){
 			for (byte j=0; j<8; j++){//search entire board
@@ -108,6 +108,47 @@ public class Board {
 										this.board[i + operation][j + operation2] = this.board[i][j];
 										this.board[i][j] = 0;
 										System.out.println(this.toString());
+									}
+									//add board to "frontier" or wat do
+								}catch(IndexOutOfBoundsException e){
+									System.out.println("You dun fugged up");
+								}
+								operation2 += 1;
+							}
+							operation += 1;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	
+	public void moveQueens(){
+		byte moveNumber = 8;
+		byte boundsCounter = 0;
+		byte[][] bounds = new byte[1][8];
+		for (byte i=0; i<8; i++){
+			for (byte j=0; j<8; j++){//search entire board
+				if(this.board[i][j] == Q||this.board[i][j] == bQ){
+					for(byte k=1; k<=moveNumber; k++){//need to use this
+						byte operation = (byte) (-1*k);
+						for(byte x=0; x<3; x++){
+							byte operation2 = (byte) (-1*k);
+							for(byte y=0; y<3; y++){
+								try{
+									if (this.board[i + operation][j + operation2] != 0){
+										//this square is as far as you can go
+										bounds[boundsCounter] = new byte[]{(byte) (i + operation),(byte) (j + operation2)};
+									}
+									else{
+										for (byte[] bound : bounds){
+											if(bound[0] < (i + operation) && bound[1] < (byte) (j + operation2)){
+												this.board[i + operation][j + operation2] = Q;
+												this.board[i][j] = 0;
+												System.out.println(this.toString());
+											}
+										}
 									}
 									//add board to "frontier" or wat do
 								}catch(IndexOutOfBoundsException e){

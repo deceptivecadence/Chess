@@ -12,7 +12,8 @@ public class Run {
 		//b.move("b1","c3");
 		//System.out.println(b.toString());
 		//System.out.println(b.flipBoard().toString());
-		b.moveKing();
+		//b.moveKings();
+		b.moveQueens();
 		URLSendReceive butler = new URLSendReceive();
 		Date time = new Date();
 		
