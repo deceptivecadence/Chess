@@ -21,18 +21,18 @@ public class Board {
 		//Set up top row
 		for(byte i=0; i<2; i++){
 			if(i==0){
-				board[i][0] = R;
-				board[i][1] = N;
-				board[i][2] = B;
-				board[i][3] = Q;
-				board[i][4] = K;
-				board[i][5] = B;
-				board[i][6] = N;
-				board[i][7] = R;
+				board[i][0] = bR;
+				board[i][1] = bN;
+				board[i][2] = bB;
+				board[i][3] = bQ;
+				board[i][4] = bK;
+				board[i][5] = bB;
+				board[i][6] = bN;
+				board[i][7] = bR;
 			}
 			else{
 				for(byte j=0; j<8; j++){
-					board[i][j] = P;
+					board[i][j] = bP;
 				}
 			}
 		}
@@ -41,22 +41,22 @@ public class Board {
 		for(byte j=6; j<8; j++){
 			if(j==6){
 				for(byte k=0; k<8; k++){
-					board[j][k] = (byte) (P + 10);
+					board[j][k] = (byte) P;
 				}
 			}
 			else{
-				board[j][0] = bR;
-				board[j][1] = bN;
-				board[j][2] = bB;
-				board[j][3] = bQ;
-				board[j][4] = bK;
-				board[j][5] = bB;
-				board[j][6] = bN;
-				board[j][7] = bR;
+				board[j][0] = R;
+				board[j][1] = N;
+				board[j][2] = B;
+				board[j][3] = Q;
+				board[j][4] = K;
+				board[j][5] = B;
+				board[j][6] = N;
+				board[j][7] = R;
 				
 			}
 		}
-		//board[2][3] = B;
+		//board[1][1] = P;
 	}
 	
 	public void move(String from, String to){
@@ -347,38 +347,65 @@ public class Board {
 					byte operationY;
 					for(byte x=-1; x<2; x++){
 											
-						for(byte y=-1; y<2; y++){ 
+						for(byte y=-1; y<0; y++){ 
 							
 							for(byte k=1; k<=moveNumber; k++){//degree of movement (spaces away from original spot)
 								operationX = (byte) (x*k);
 								operationY = (byte) (y*k);
-								if(operationX==0 && operationY!=0){
-									try{
-										if (isWhite(this.board[i + operationY][j + operationX]) || 
-											(i + operationY < 0) || (i + operationY > 7) ||
-											(j + operationX < 0) || (j + operationX > 7)) {
-											break;
-										}
-										else{
 
-											Board board2 = new Board();
-											board2.board[i + operationY][j + operationX] = board2.board[i][j];
-											board2.board[i][j] = 0;
-											System.out.println(board2.toString());
-											System.out.print(j);
-											System.out.print(" +"+operationX);
-											System.out.print(", "+i);
-											System.out.println(" +"+operationY);
-											System.out.println("");
-	
-											//we can still do the move if there is a black piece here, but we can go no further.
-											if (isBlack(this.board[i + operationY][j + operationX])) {
-												break;
+								try{
+									if (isWhite(this.board[i + operationY][j + operationX]) || 
+										(i + operationY < 0) || (i + operationY > 7) ||
+										(j + operationX < 0) || (j + operationX > 7)) {
+										break;
+									}
+									else{
+										Board board2 = new Board();
+										if(operationX==0 && !isBlack(this.board[i + operationY][j + operationX])){
+											for (byte p=0;p<2;p++){
+												board2 = new Board();
+												if(i==6 && operationY != -2){
+													operationY = -2;
+												}
+												else{
+													operationY = -1;
+												}
+												board2.board[i + operationY][j + operationX] = board2.board[i][j];
+												board2.board[i][j] = 0;
+												if((i + operationY) == 0){
+													board2.board[i + operationY][j + operationX] = Q;
+												}
+												System.out.println(board2.toString());
+												System.out.print(j);
+												System.out.print(" +"+operationX);
+												System.out.print(", "+i);
+												System.out.println(" +"+operationY);
+												System.out.println("");
 											}
 										}
-									}catch(IndexOutOfBoundsException e){
-										System.out.println("You dun fugged up");
+										else if (operationX !=0 && isBlack(this.board[i + operationY][j + operationX])){
+											board2 = new Board();
+											if(isBlack(this.board[i + operationY][j + operationX])){
+												board2.board[i + operationY][j + operationX] = board2.board[i][j];
+												board2.board[i][j] = 0;
+												if((i + operationY) == 0){
+													board2.board[i + operationY][j + operationX] = Q;
+												}
+												System.out.println(board2.toString());
+												System.out.print(j);
+												System.out.print(" +"+operationX);
+												System.out.print(", "+i);
+												System.out.println(" +"+operationY);
+												System.out.println("");
+											}
+										}
+										//we can still do the move if there is a black piece here, but we can go no further.
+										if (isBlack(this.board[i + operationY][j + operationX])) {
+											break;
+										}
 									}
+								}catch(IndexOutOfBoundsException e){
+									System.out.println("You dun fugged up");
 								}
 							}
 						}
