@@ -132,7 +132,9 @@ public class Board {
 				if(this.board[i][j] == Q||this.board[i][j] == bQ){
 					boundsCounter = 0;
 					byte[][] bounds = new byte[8][2];
-					for(byte b)
+					for(byte b=0;b<bounds.length;b++){
+						bounds[b] = new byte[] {-1,-1};
+					}
 					for(byte k=1; k<=moveNumber; k++){//degree of movement (spaces away from original spot)
 						byte operationX = (byte) (-1*k);
 						for(byte x=0; x<3; x++){
