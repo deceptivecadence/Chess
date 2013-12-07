@@ -106,11 +106,20 @@ public class Board {
 								operationX = (byte) (x*k);
 								operationY = (byte) (y*k);
 								try{
-									if (this.board[i + operationY][j + operationX] == 0){
+									if (isWhite(this.board[i + operationY][j + operationX]) || 
+										(i + operationY < 0) || (i + operationY > 7) ||
+										(j + operationX < 0) || (j + operationX > 7)){
+										break;
+									}
+									else {
 										Board board2 = new Board();
 										board2.board[i + operationY][j + operationX] = board2.board[i][j];
 										board2.board[i][j] = 0;
 										System.out.println(board2.toString());
+
+										if (isBlack(this.board[i + operationY][j + operationX])) {
+											break;
+										}
 									}
 									//add board to "frontier" or wat do
 								}catch(IndexOutOfBoundsException e){
