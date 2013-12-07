@@ -185,6 +185,11 @@ public class Board {
 			}
 		}
 	}
+	
+	
+	
+	
+	
 	/**
 	 * Checks if piece can move to the location
 	 * @param oprX -  + or - or 0 modifier for the x direction
