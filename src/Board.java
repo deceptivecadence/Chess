@@ -347,7 +347,7 @@ public class Board {
 					byte operationY;
 					for(byte x=-1; x<2; x++){
 											
-						for(byte y=-1; y<2; y++){
+						for(byte y=-1; y<2; y++){ 
 							
 							for(byte k=1; k<=moveNumber; k++){//degree of movement (spaces away from original spot)
 								operationX = (byte) (x*k);
