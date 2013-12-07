@@ -96,12 +96,15 @@ public class Board {
 		byte moveNumber = 1;
 		for (byte i=0; i<8; i++){
 			for (byte j=0; j<8; j++){//search entire board
-				if(this.board[i][j] == K||this.board[i][j] == bK){
-					for(byte k=1; k<=moveNumber; k++){//need to use this
-						byte operationX = (byte) (-1*k);
-						for(byte x=0; x<3; x++){
-							byte operationY = (byte) (-1*k);
-							for(byte y=0; y<3; y++){
+				if(this.board[i][j] == K){
+					byte operationX;
+					byte operationY;
+					
+					for(byte x=-1; x<2; x++){
+						for(byte y=-1; y<2; y++){
+							for(byte k=1; k<=moveNumber; k++){
+								operationX = (byte) (x*k);
+								operationY = (byte) (y*k);
 								try{
 									if (this.board[i + operationY][j + operationX] == 0){
 										Board board2 = new Board();
@@ -113,9 +116,7 @@ public class Board {
 								}catch(IndexOutOfBoundsException e){
 									System.out.println("You dun fugged up");
 								}
-								operationY += 1;
 							}
-							operationX += 1;
 						}
 					}
 				}
