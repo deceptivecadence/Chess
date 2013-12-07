@@ -136,10 +136,13 @@ public class Board {
 						bounds[b] = new byte[] {-1,-1};
 					}
 					for(byte k=1; k<=moveNumber; k++){//degree of movement (spaces away from original spot)
-						byte operationX = (byte) (-1*k);
-						for(byte x=0; x<3; x++){
-							byte operationY = (byte) (-1*k);
-							for(byte y=0; y<3; y++){
+						byte operationX;
+						byte operationY;
+						for(byte x=-1; x<2; x++){
+							operationX = (byte) x*k;
+							
+							for(byte y=-1; y<2; y++){
+								operationY = (byte) y*k;
 								try{
 									/*if(this.board[i][j] == Q||this.board[i][j] == bQ){
 										System.out.println(i+" "+j);
@@ -178,9 +181,7 @@ public class Board {
 								}catch(IndexOutOfBoundsException e){
 									System.out.println("You dun fugged up");
 								}
-								operationY += (1*k);
 							}
-							operationX += (1*k);
 						}
 					}
 				}
