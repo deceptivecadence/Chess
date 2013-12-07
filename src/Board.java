@@ -129,33 +129,38 @@ public class Board {
 		byte boundsCounter = 0;
 		for (byte i=0; i<8; i++){
 			for (byte j=0; j<8; j++){//search entire board
-				if(this.board[i][j] == Q||this.board[i][j] == bQ){
-					boundsCounter = 0;
+				if(this.board[i][j] == Q){
+					/*boundsCounter = 0;
 					byte[][] bounds = new byte[8][2];
 					for(byte b=0;b<bounds.length;b++){
 						bounds[b] = new byte[] {-1,-1};
-					}
-					for(byte k=1; k<=moveNumber; k++){//degree of movement (spaces away from original spot)
-						byte operationX;
-						byte operationY;
-						for(byte x=-1; x<2; x++){
-							operationX = (byte) (x*k);
+					}*/
+					byte operationX;
+					byte operationY;
+					for(byte x=-1; x<2; x++){
+						operationX = (byte) (x*k);
+						
+						for(byte y=-1; y<2; y++){
+							operationY = (byte) (y*k);
+
+							for(byte k=1; k<=moveNumber; k++){//degree of movement (spaces away from original spot)
 							
-							for(byte y=-1; y<2; y++){
-								operationY = (byte) (y*k);
 								try{
 									/*if(this.board[i][j] == Q||this.board[i][j] == bQ){
 										System.out.println(i+" "+j);
 										System.out.println(operationX+" "+operationY);
 										System.out.println(Arrays.deepToString(bounds));
 									}*/
-									if (this.board[i + operationY][j + operationX] != 0){
+									if (isWhite(this.board[i + operationY][j + operationX]) || 
+										(i + operationY < 0) || (i + operationY > 7) ||
+										(j + operationX < 0) || (j + operationX > 7)) {
 										//this square is as far as you can go
-										bounds[boundsCounter] = new byte[]{(byte) (j + operationX),(byte) (i + operationY)};
-										boundsCounter++;
+										break;
+										//bounds[boundsCounter] = new byte[]{(byte) (j + operationX),(byte) (i + operationY)};
+										//boundsCounter++;
 									}
 									else{
-										boolean conflict = true;
+										/*boolean conflict = true;
 										for (byte[] bound : bounds){
 											if(check(operationX, j, operationY, i, bound)){
 												conflict = false;
@@ -163,20 +168,25 @@ public class Board {
 											}else{
 												conflict = true;
 											}
-											
+										
 										}
-										if(!conflict){
-											Board board2 = new Board();
-											board2.board[i + operationY][j + operationX] = board2.board[i][j];
-											board2.board[i][j] = 0;
-											System.out.println(board2.toString());
-											System.out.print(j);
-											System.out.print(" +"+operationX);
-											System.out.print(", "+i);
-											System.out.println(" +"+operationY);
-											System.out.println(Arrays.deepToString(bounds));
-											System.out.println("");
+										if(!conflict){*/
+										Board board2 = new Board();
+										board2.board[i + operationY][j + operationX] = board2.board[i][j];
+										board2.board[i][j] = 0;
+										System.out.println(board2.toString());
+										System.out.print(j);
+										System.out.print(" +"+operationX);
+										System.out.print(", "+i);
+										System.out.println(" +"+operationY);
+										System.out.println(Arrays.deepToString(bounds));
+										System.out.println("");
+
+										//we can still do the move if there is a black piece here, but we can go no further.
+										if (isBlack(this.board[i + operationY][j + operationX]) {
+											break;
 										}
+										//}
 									}
 								}catch(IndexOutOfBoundsException e){
 									System.out.println("You dun fugged up");
@@ -272,6 +282,14 @@ public class Board {
 		}
 		
 		return newBoard;
+	}
+
+	public boolean isWhite(byte piece) {
+		return (piece < 10 && piece != 0);
+	}
+
+	public boolean isBlack(byte piece) {
+		return (piece > 10);
 	}
 	
 	@Override
