@@ -139,10 +139,10 @@ public class Board {
 						byte operationX;
 						byte operationY;
 						for(byte x=-1; x<2; x++){
-							operationX = (byte) x*k;
+							operationX = (byte) (x*k);
 							
 							for(byte y=-1; y<2; y++){
-								operationY = (byte) y*k;
+								operationY = (byte) (y*k);
 								try{
 									/*if(this.board[i][j] == Q||this.board[i][j] == bQ){
 										System.out.println(i+" "+j);
@@ -264,7 +264,10 @@ public class Board {
 		Board newBoard = new Board();
 		for (int i = 0; i < 8; i += 1) {
 			for (int j = 0; j < 8; j += 1) {
-				newBoard.board[7-i][7-j] = this.board[i][j];
+				if (this.board[i][j] >= 10)
+					newBoard.board[i][j] = this.board[i][j] - 10;
+				else
+					newBoard.board[i][j] = this.board[i][j] + 10;
 			}
 		}
 		
