@@ -296,6 +296,46 @@ public class Board {
 			}
 		}
 	}
+
+	public void moveKnights(){
+		for (byte i=0; i<8; i++){
+			for (byte j=0; j<8; j++){//search entire board
+				if(this.board[i][j] == K){
+					byte operationX;
+					byte operationY;
+
+					byte[][] wombo = {{-1,-2}, {1,-2}, {-2,-1}, {2,-1},
+										{-2,1}, {2,1}, {-1,2}, {1,2}};
+					
+					for(byte[] coords : wombo) {
+
+						operationX = coords[0];
+						operationY = coords[1];
+						try{
+							if (isWhite(this.board[i + operationY][j + operationX]) || 
+								(i + operationY < 0) || (i + operationY > 7) ||
+								(j + operationX < 0) || (j + operationX > 7)){
+								continue;
+							}
+							else {
+								Board board2 = new Board();
+								board2.board[i + operationY][j + operationX] = board2.board[i][j];
+								board2.board[i][j] = 0;
+								System.out.println(board2.toString());
+
+								if (isBlack(this.board[i + operationY][j + operationX])) {
+									continue;
+								}
+							}
+							//add board to "frontier" or wat do
+						}catch(IndexOutOfBoundsException e){
+							System.out.println("You dun fugged up");
+						}
+					}
+				}
+			}
+		}
+	}
 	
 	
 	public void movePawns(){
