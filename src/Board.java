@@ -265,9 +265,9 @@ public class Board {
 		for (int i = 0; i < 8; i += 1) {
 			for (int j = 0; j < 8; j += 1) {
 				if (this.board[i][j] >= 10)
-					newBoard.board[i][j] = this.board[i][j] - 10;
+					newBoard.board[i][j] = (byte) (this.board[i][j] - 10);
 				else
-					newBoard.board[i][j] = this.board[i][j] + 10;
+					newBoard.board[i][j] = (byte) (this.board[i][j] + 10);
 			}
 		}
 		
