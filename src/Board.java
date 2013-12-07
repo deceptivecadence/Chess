@@ -131,7 +131,7 @@ public class Board {
 				}
 			}
 		}
-	}
+	} 
 	
 	
 	public void moveQueens(){
