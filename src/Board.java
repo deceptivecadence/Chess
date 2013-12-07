@@ -56,7 +56,7 @@ public class Board {
 				
 			}
 		}
-		//board[6][3] = Q;
+		//board[1][3] = Q;
 	}
 	
 	public void move(String from, String to){
@@ -125,32 +125,20 @@ public class Board {
 	
 	
 	public void moveQueens(){
-		byte moveNumber = 7;//0-7
-		byte boundsCounter = 0;
+		byte moveNumber = 7;
 		for (byte i=0; i<8; i++){
 			for (byte j=0; j<8; j++){//search entire board
 				if(this.board[i][j] == Q){
-					/*boundsCounter = 0;
-					byte[][] bounds = new byte[8][2];
-					for(byte b=0;b<bounds.length;b++){
-						bounds[b] = new byte[] {-1,-1};
-					}*/
 					byte operationX;
 					byte operationY;
 					for(byte x=-1; x<2; x++){
-						operationX = (byte) (x*k);
-						
+												
 						for(byte y=-1; y<2; y++){
-							operationY = (byte) (y*k);
-
-							for(byte k=1; k<=moveNumber; k++){//degree of movement (spaces away from original spot)
 							
+							for(byte k=1; k<=moveNumber; k++){//degree of movement (spaces away from original spot)
+								operationX = (byte) (x*k);
+								operationY = (byte) (y*k);
 								try{
-									/*if(this.board[i][j] == Q||this.board[i][j] == bQ){
-										System.out.println(i+" "+j);
-										System.out.println(operationX+" "+operationY);
-										System.out.println(Arrays.deepToString(bounds));
-									}*/
 									if (isWhite(this.board[i + operationY][j + operationX]) || 
 										(i + operationY < 0) || (i + operationY > 7) ||
 										(j + operationX < 0) || (j + operationX > 7)) {
@@ -179,11 +167,10 @@ public class Board {
 										System.out.print(" +"+operationX);
 										System.out.print(", "+i);
 										System.out.println(" +"+operationY);
-										System.out.println(Arrays.deepToString(bounds));
 										System.out.println("");
 
 										//we can still do the move if there is a black piece here, but we can go no further.
-										if (isBlack(this.board[i + operationY][j + operationX]) {
+										if (isBlack(this.board[i + operationY][j + operationX])) {
 											break;
 										}
 										//}
@@ -296,7 +283,16 @@ public class Board {
 	public String toString(){
 		String output = "";
 		for(byte i=0; i<8; i++){
-			output += Arrays.toString(board[i]) + "\n";
+			if(i<6){
+				output += "[";
+				for(byte j=0; j<8; j++){
+					output += "0"+board[i][j]+", ";
+				}
+				output += "]"+"\n";
+			}
+			else{
+				output += Arrays.toString(board[i]) + "\n";
+			}
 		}
 		return output;
 	}
