@@ -13,7 +13,8 @@ public class Run {
 		//System.out.println(b.toString());
 		//System.out.println(b.flipBoard().toString());
 		//b.moveKings();
-		b.moveQueens();
+		//b.moveQueens();\
+		b.moveBishops();
 		URLSendReceive butler = new URLSendReceive();
 		Date time = new Date();
 		

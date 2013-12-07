@@ -56,7 +56,7 @@ public class Board {
 				
 			}
 		}
-		//board[1][3] = Q;
+		//board[2][3] = B;
 	}
 	
 	public void move(String from, String to){
@@ -197,8 +197,105 @@ public class Board {
 	}
 	
 	
+	public void moveRooks(){
+		byte moveNumber = 7;
+		for (byte i=0; i<8; i++){
+			for (byte j=0; j<8; j++){//search entire board
+				if(this.board[i][j] == R){
+					byte operationX;
+					byte operationY;
+					for(byte x=-1; x<2; x++){
+											
+						for(byte y=-1; y<2; y++){
+							
+							for(byte k=1; k<=moveNumber; k++){//degree of movement (spaces away from original spot)
+								operationX = (byte) (x*k);
+								operationY = (byte) (y*k);
+								if(operationX==0||operationY==0){
+									try{
+										if (isWhite(this.board[i + operationY][j + operationX]) || 
+											(i + operationY < 0) || (i + operationY > 7) ||
+											(j + operationX < 0) || (j + operationX > 7)) {
+											break;
+										}
+										else{
+
+											Board board2 = new Board();
+											board2.board[i + operationY][j + operationX] = board2.board[i][j];
+											board2.board[i][j] = 0;
+											System.out.println(board2.toString());
+											System.out.print(j);
+											System.out.print(" +"+operationX);
+											System.out.print(", "+i);
+											System.out.println(" +"+operationY);
+											System.out.println("");
 	
+											//we can still do the move if there is a black piece here, but we can go no further.
+											if (isBlack(this.board[i + operationY][j + operationX])) {
+												break;
+											}
+										}
+									}catch(IndexOutOfBoundsException e){
+										System.out.println("You dun fugged up");
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 	
+	public void moveBishops(){
+		byte moveNumber = 7;
+		for (byte i=0; i<8; i++){
+			for (byte j=0; j<8; j++){//search entire board
+				if(this.board[i][j] == B){
+					byte operationX;
+					byte operationY;
+					for(byte x=-1; x<2; x++){
+											
+						for(byte y=-1; y<2; y++){
+							
+							for(byte k=1; k<=moveNumber; k++){//degree of movement (spaces away from original spot)
+								operationX = (byte) (x*k);
+								operationY = (byte) (y*k);
+								if(operationX!=0 && operationY!=0){
+									try{
+										if (isWhite(this.board[i + operationY][j + operationX]) || 
+											(i + operationY < 0) || (i + operationY > 7) ||
+											(j + operationX < 0) || (j + operationX > 7)) {
+											break;
+										}
+										else{
+
+											Board board2 = new Board();
+											board2.board[i + operationY][j + operationX] = board2.board[i][j];
+											board2.board[i][j] = 0;
+											System.out.println(board2.toString());
+											System.out.print(j);
+											System.out.print(" +"+operationX);
+											System.out.print(", "+i);
+											System.out.println(" +"+operationY);
+											System.out.println("");
+	
+											//we can still do the move if there is a black piece here, but we can go no further.
+											if (isBlack(this.board[i + operationY][j + operationX])) {
+												break;
+											}
+										}
+									}catch(IndexOutOfBoundsException e){
+										System.out.println("You dun fugged up");
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 	
 	/**
 	 * Checks if piece can move to the location
@@ -298,15 +395,17 @@ public class Board {
 	public String toString(){
 		String output = "";
 		for(byte i=0; i<8; i++){
-			if(i<6){
+			if(i<8){
 				output += "[";
 				for(byte j=0; j<8; j++){
-					output += "0"+board[i][j]+", ";
+					if(board[i][j]<10){
+						output += "0"+board[i][j]+", ";
+					}
+					else{
+						output += board[i][j]+", ";
+					}
 				}
 				output += "]"+"\n";
-			}
-			else{
-				output += Arrays.toString(board[i]) + "\n";
 			}
 		}
 		return output;
