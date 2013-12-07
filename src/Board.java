@@ -1,7 +1,5 @@
 import java.util.Arrays;
 
-import org.json.JSONArray;
-
 public class Board {
 	private byte K = 6;
 	private byte Q = 5;
@@ -34,7 +32,7 @@ public class Board {
 			}
 			else{
 				for(byte j=0; j<8; j++){
-					board[i][j] = Q;
+					board[i][j] = P;
 				}
 			}
 		}
@@ -58,6 +56,7 @@ public class Board {
 				
 			}
 		}
+		//board[6][3] = Q;
 	}
 	
 	public void move(String from, String to){
@@ -99,14 +98,14 @@ public class Board {
 			for (byte j=0; j<8; j++){//search entire board
 				if(this.board[i][j] == K||this.board[i][j] == bK){
 					for(byte k=1; k<=moveNumber; k++){//need to use this
-						byte operation = (byte) (-1*k);
+						byte operationX = (byte) (-1*k);
 						for(byte x=0; x<3; x++){
-							byte operation2 = (byte) (-1*k);
+							byte operationY = (byte) (-1*k);
 							for(byte y=0; y<3; y++){
 								try{
-									if (this.board[i + operation][j + operation2] == 0){
+									if (this.board[i + operationY][j + operationX] == 0){
 										Board board2 = new Board();
-										board2.board[i + operation][j + operation2] = board2.board[i][j];
+										board2.board[i + operationY][j + operationX] = board2.board[i][j];
 										board2.board[i][j] = 0;
 										System.out.println(board2.toString());
 									}
@@ -114,9 +113,9 @@ public class Board {
 								}catch(IndexOutOfBoundsException e){
 									System.out.println("You dun fugged up");
 								}
-								operation2 += 1;
+								operationY += 1;
 							}
-							operation += 1;
+							operationX += 1;
 						}
 					}
 				}
@@ -128,36 +127,52 @@ public class Board {
 	public void moveQueens(){
 		byte moveNumber = 7;//0-7
 		byte boundsCounter = 0;
-		byte[][] bounds = new byte[1][64];
 		for (byte i=0; i<8; i++){
 			for (byte j=0; j<8; j++){//search entire board
 				if(this.board[i][j] == Q||this.board[i][j] == bQ){
+					boundsCounter = 0;
+					byte[][] bounds = new byte[8][2];
+					for(byte b)
 					for(byte k=1; k<=moveNumber; k++){//degree of movement (spaces away from original spot)
 						byte operationX = (byte) (-1*k);
 						for(byte x=0; x<3; x++){
 							byte operationY = (byte) (-1*k);
 							for(byte y=0; y<3; y++){
 								try{
+									/*if(this.board[i][j] == Q||this.board[i][j] == bQ){
+										System.out.println(i+" "+j);
+										System.out.println(operationX+" "+operationY);
+										System.out.println(Arrays.deepToString(bounds));
+									}*/
 									if (this.board[i + operationY][j + operationX] != 0){
 										//this square is as far as you can go
-										bounds[boundsCounter] = new byte[]{(byte) (i + operationY),(byte) (j + operationX)};
+										bounds[boundsCounter] = new byte[]{(byte) (j + operationX),(byte) (i + operationY)};
+										boundsCounter++;
 									}
 									else{
+										boolean conflict = true;
 										for (byte[] bound : bounds){
-											if(check(operationY, j, operationX, i, bound)){
-												Board board2 = new Board();
-												board2.board[i + operationY][j + operationX] = board2.board[i][j];
-												board2.board[i][j] = 0;
-												System.out.println(board2.toString());
-												System.out.print(j);
-												System.out.print(" +"+operationX);
-												System.out.print(", "+i);
-												System.out.println(" +"+operationY);
-												System.out.println(Arrays.deepToString(bounds));
+											if(check(operationX, j, operationY, i, bound)){
+												conflict = false;
+												System.out.println("***"+Arrays.toString(bound)+"***");
+											}else{
+												conflict = true;
 											}
+											
+										}
+										if(!conflict){
+											Board board2 = new Board();
+											board2.board[i + operationY][j + operationX] = board2.board[i][j];
+											board2.board[i][j] = 0;
+											System.out.println(board2.toString());
+											System.out.print(j);
+											System.out.print(" +"+operationX);
+											System.out.print(", "+i);
+											System.out.println(" +"+operationY);
+											System.out.println(Arrays.deepToString(bounds));
+											System.out.println("");
 										}
 									}
-									//add board to "frontier" or wat do
 								}catch(IndexOutOfBoundsException e){
 									System.out.println("You dun fugged up");
 								}
@@ -221,7 +236,7 @@ public class Board {
 				return bound[1] >= (byte) (y + oprY);
 			}
 			else{
-				return true;
+				return false;
 			}
 		}
 	}
