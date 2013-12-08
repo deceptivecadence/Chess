@@ -106,7 +106,8 @@ public class Run {
 
 		for (Board ourState : ourMoves) {
 			ArrayList<ArrayList<Board>> tree = new ArrayList<ArrayList<Board>>();
-			tree.add(new ArrayList<Board>()).add(ourState);
+			tree.add(new ArrayList<Board>());
+			tree.get(0).add(ourState);
 			for (int i = 1; i < 5; i += 1) {
 				for (Board state : tree.get(i-1)) {
 					boolean ww = white;
