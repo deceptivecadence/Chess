@@ -17,7 +17,7 @@ public class Run {
 		//System.out.println(b.flipBoard().toString());
 		//b.moveKings();
 		//b.moveQueens();\
-		b.moveKnights();
+		//b.moveKnights();
 		URLSendReceive butler = new URLSendReceive();
 		Date time = new Date();
 		Board currentState = new Board();
@@ -53,7 +53,9 @@ public class Run {
 					//do a move
 
 					ourMove = findMove(currentState);
-					butler.urlSend(ourMove);
+					if(butler.urlSend(ourMove).getString("message").substring(0,12).equals("invalid move")){
+						
+					}
 					System.out.println(ourMove);
 					
 					currentState.moveFromInput(ourMove);
