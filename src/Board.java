@@ -458,7 +458,7 @@ public class Board {
 					byte operationX;
 					byte operationY;
 					for(byte x=-1; x<2; x++){
-											
+						byte y;				
 						if (white)
 							y = -1;
 						else
