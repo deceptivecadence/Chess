@@ -187,7 +187,7 @@ public class Board {
 							}
 						}
 					}
-				}
+				} 
 			}
 		}
 		return boards;
