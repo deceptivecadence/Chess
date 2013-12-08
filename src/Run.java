@@ -54,7 +54,7 @@ public class Run {
 					lastMoveNumber = Integer.parseInt(json.get("lastmovenumber").toString());
 					lastMove = json.get("lastmove").toString();
 					currentState.moveFromInput(lastMove);
-					currentState = currentState.flipBoard();
+					//currentState = currentState.flipBoard();
 					//do a move
 
 					ourMove = findMove(currentState, weAreWhite);
@@ -146,7 +146,7 @@ public class Run {
 						else {
 							System.out.println(ourMove);
 							currentState.moveFromInput(ourMove);
-							currentState = currentState.flipBoard();
+							//currentState = currentState.flipBoard();
 							System.out.println(currentState);
 						}
 					}
