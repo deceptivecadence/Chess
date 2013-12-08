@@ -58,84 +58,7 @@ public class Run {
 					//do a move
 
 					ourMove = findMove(currentState, weAreWhite);
-					/*if (weAreBlack) {
-						String piece = "";
-						String from = "";
-						String to = "";
-						String promotion = "";
-
-						piece = ourMove.substring(0, 1);
-						from = ourMove.substring(1, 3);
-						to = ourMove.substring(3,5);
-						if (ourMove.length() > 5) {
-							promotion = ourMove.substring(5,6);
-						}
-
-						byte byteFromCol  = -1;
-						byte byteToCol    = -1;
-		
-						byte byteFromRow   = (byte) (8 - Integer.parseInt(from.substring(1, 2)));
-						byte byteToRow     = (byte) (8 - Integer.parseInt(to.substring(1, 2)));
-						
-						switch(from.substring(0, 1)){
-							case "a": byteFromCol = 0; break;
-							case "b": byteFromCol = 1; break;
-							case "c": byteFromCol = 2; break;
-							case "d": byteFromCol = 3; break;
-							case "e": byteFromCol = 4; break;
-							case "f": byteFromCol = 5; break;
-							case "g": byteFromCol = 6; break;
-							case "h": byteFromCol = 7; break;
-						}
-		
-						switch(to.substring(0, 1)){
-							case "a": byteToCol = 0; break;
-							case "b": byteToCol = 1; break;
-							case "c": byteToCol = 2; break;
-							case "d": byteToCol = 3; break;
-							case "e": byteToCol = 4; break;
-							case "f": byteToCol = 5; break;
-							case "g": byteToCol = 6; break;
-							case "h": byteToCol = 7; break;
-						}
-
-						byteFromCol = (byte) (7 - byteFromCol);
-						byteFromRow = (byte) (7 - byteFromRow);
-						byteToCol = (byte) (7 - byteToCol);
-						byteToRow = (byte) (7 - byteToRow);
-
-						String fY = "" + (8 - byteFromRow);
-						String tY = "" + (8 - byteToRow);
-
-						String fX = "";
-						String tX = "";
-
-						switch (byteFromCol) {
-							case (0): fX = "a"; break;
-							case (1): fX = "b"; break;
-							case (2): fX = "c"; break;
-							case (3): fX = "d"; break;
-							case (4): fX = "e"; break;
-							case (5): fX = "f"; break;
-							case (6): fX = "g"; break;
-							case (7): fX = "h"; break;
-						}
-
-						switch (byteToCol) {
-							case (0): tX = "a"; break;
-							case (1): tX = "b"; break;
-							case (2): tX = "c"; break;
-							case (3): tX = "d"; break;
-							case (4): tX = "e"; break;
-							case (5): tX = "f"; break;
-							case (6): tX = "g"; break;
-							case (7): tX = "h"; break;
-						}
-
-						//System.out.println(piece + fX + fY + tX + tY + promotion);
-						ourMove = piece + fX + fY + tX + tY + promotion;
-					}
-					*/
+					
 					JSONObject response = butler.urlSend(ourMove);
 					System.out.println(ourMove);
 					System.out.println(response.toString());
@@ -188,12 +111,21 @@ public class Run {
 			theirMoves.addAll(ourState.moveRooks(!white));
 			theirMoves.addAll(ourState.moveKnights(!white));
 			theirMoves.addAll(ourState.movePawns(!white));
-			
+
+			boolean prune = false;
 			int minValue = 99999;
 			for (Board theirState : theirMoves) {
 				if (theirState.value(white) < minValue) {
 					minValue = theirState.value(white);
+					if (minValue < maxValue) {
+						prune = true;
+						break;
+					}
 				}
+			}
+
+			if (prune) {
+				break;
 			}
 
 			if (minValue > maxValue) {
@@ -209,3 +141,95 @@ public class Run {
 	}
 
 }
+
+
+/*if (weAreBlack) {
+	String piece = "";
+	String from = "";
+
+	String to = "";
+	String promotion = "";
+
+	piece = ourMove.substring(0, 1);
+	from = ourMove.substring(1, 3);
+	to = ourMove.substring(3,5);
+
+	if (ourMove.length() > 5) {
+		promotion = ourMove.substring(5,6);
+	}
+
+	byte byteFromCol  = -1;
+	byte byteToCol    = -1;
+
+
+	byte byteFromRow   = (byte) (8 - Integer.parseInt(from.substring(1, 2)));
+	byte byteToRow     = (byte) (8 - Integer.parseInt(to.substring(1, 2)));
+	
+	switch(from.substring(0, 1)){
+		case "a": byteFromCol = 0; break;
+		case "b": byteFromCol = 1; break;
+
+		case "c": byteFromCol = 2; break;
+		case "d": byteFromCol = 3; break;
+		case "e": byteFromCol = 4; break;
+		case "f": byteFromCol = 5; break;
+		case "g": byteFromCol = 6; break;
+		case "h": byteFromCol = 7; break;
+	}
+
+
+	switch(to.substring(0, 1)){
+		case "a": byteToCol = 0; break;
+		case "b": byteToCol = 1; break;
+		case "c": byteToCol = 2; break;
+		case "d": byteToCol = 3; break;
+
+		case "e": byteToCol = 4; break;
+		case "f": byteToCol = 5; break;
+		case "g": byteToCol = 6; break;
+		case "h": byteToCol = 7; break;
+	}
+
+
+	byteFromCol = (byte) (7 - byteFromCol);
+	byteFromRow = (byte) (7 - byteFromRow);
+	byteToCol = (byte) (7 - byteToCol);
+	byteToRow = (byte) (7 - byteToRow);
+
+	String fY = "" + (8 - byteFromRow);
+	String tY = "" + (8 - byteToRow);
+
+
+	String fX = "";
+	String tX = "";
+
+	switch (byteFromCol) {
+		case (0): fX = "a"; break;
+
+		case (1): fX = "b"; break;
+		case (2): fX = "c"; break;
+		case (3): fX = "d"; break;
+		case (4): fX = "e"; break;
+		case (5): fX = "f"; break;
+		case (6): fX = "g"; break;
+		case (7): fX = "h"; break;
+
+	}
+
+	switch (byteToCol) {
+		case (0): tX = "a"; break;
+		case (1): tX = "b"; break;
+		case (2): tX = "c"; break;
+
+		case (3): tX = "d"; break;
+		case (4): tX = "e"; break;
+		case (5): tX = "f"; break;
+		case (6): tX = "g"; break;
+		case (7): tX = "h"; break;
+	}
+
+
+	//System.out.println(piece + fX + fY + tX + tY + promotion);
+	ourMove = piece + fX + fY + tX + tY + promotion;
+}
+*/
