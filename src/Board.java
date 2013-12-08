@@ -91,7 +91,7 @@ public class Board {
 		this.board[byteToRow][byteToCol] = piece;
 		if(!promotion.equals("")){
 			switch(promotion){
-				case "Q": this.board[byteToRow][byteToCol] = bQ;
+				case "Q": this.board[byteToRow][byteToCol] = bQ; 
 				case "R": this.board[byteToRow][byteToCol] = bQ;
 				case "B": this.board[byteToRow][byteToCol] = bB;
 				case "N": this.board[byteToRow][byteToCol] = bN;
