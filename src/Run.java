@@ -25,6 +25,11 @@ public class Run {
 		JSONObject json = butler.urlReceive(butler.pollURL);
 			if (json.get("ready").toString() == "true") {
 				//we are white.
+				ourMove = findMove(currentState);
+				butler.urlSend(ourMove);
+				
+				currentState.moveFromInput(ourMove);
+				currentState = currentState.flipBoard();
 			}
 			else {
 				currentState = currentState.flipBoard();
@@ -47,42 +52,9 @@ public class Run {
 					currentState = currentState.flipBoard();
 					//do a move
 
-					ArrayList<Board> ourMoves = new ArrayList<Board>();
-					ourMoves.addAll(currentState.moveKings());
-					ourMoves.addAll(currentState.moveQueens());
-					ourMoves.addAll(currentState.moveBishops());
-					ourMoves.addAll(currentState.moveRooks());
-					ourMoves.addAll(currentState.moveKnights());
-					ourMoves.addAll(currentState.movePawns());
-
-					//ArrayList<Board> anorLondo = new ArrayList<Board>();
-					String bestMove = "";
-					int maxValue = -99999;
-					for (Board ourState : ourMoves) {
-						ArrayList<Board> theirMoves = new ArrayList<Board>();
-						ourState = ourState.flipBoard();
-						theirMoves.addAll(ourState.moveKings());
-						theirMoves.addAll(ourState.moveQueens());
-						theirMoves.addAll(ourState.moveBishops());
-						theirMoves.addAll(ourState.moveRooks());
-						theirMoves.addAll(ourState.moveKnights());
-						theirMoves.addAll(ourState.movePawns());
-						
-						int minValue = 99999;
-						for (Board theirState : theirMoves) {
-							if (theirState.flipBoard().value() < minValue) {
-								minValue = theirState.flipBoard().value();
-							}
-						}
-
-						if (minValue > maxValue) {
-							maxValue = minValue;
-							bestMove = ourState.lastMove;
-						}
-					}
-
-					ourMove = bestMove;//something
+					ourMove = findMove(currentState);
 					butler.urlSend(ourMove);
+					
 					currentState.moveFromInput(ourMove);
 					currentState = currentState.flipBoard();
 				}
@@ -94,6 +66,45 @@ public class Run {
 				}
 			}
 		}
+	}
+
+	public String findMove(currentState) {
+		ArrayList<Board> ourMoves = new ArrayList<Board>();
+		ourMoves.addAll(currentState.moveKings());
+		ourMoves.addAll(currentState.moveQueens());
+		ourMoves.addAll(currentState.moveBishops());
+		ourMoves.addAll(currentState.moveRooks());
+		ourMoves.addAll(currentState.moveKnights());
+		ourMoves.addAll(currentState.movePawns());
+
+		//ArrayList<Board> anorLondo = new ArrayList<Board>();
+		String bestMove = "";
+		int maxValue = -99999;
+		for (Board ourState : ourMoves) {
+			ArrayList<Board> theirMoves = new ArrayList<Board>();
+			ourState = ourState.flipBoard();
+			theirMoves.addAll(ourState.moveKings());
+			theirMoves.addAll(ourState.moveQueens());
+			theirMoves.addAll(ourState.moveBishops());
+			theirMoves.addAll(ourState.moveRooks());
+			theirMoves.addAll(ourState.moveKnights());
+			theirMoves.addAll(ourState.movePawns());
+			
+			int minValue = 99999;
+			for (Board theirState : theirMoves) {
+				if (theirState.flipBoard().value() < minValue) {
+					minValue = theirState.flipBoard().value();
+				}
+			}
+
+			if (minValue > maxValue) {
+				maxValue = minValue;
+				bestMove = ourState.lastMove;
+			}
+		}
+
+		return bestMove;
+		
 	}
 
 }
