@@ -17,6 +17,8 @@ public class Board {
 	private byte bP = 1 + 10;
 	public byte[][] board = new byte[8][8];
 	//JSONArray pieceMapping = new JSONArray();
+
+	public String lastMove = "";
 			
 	public Board(){
 		//Set up top row
@@ -100,6 +102,38 @@ public class Board {
 			}
 		}
 	}
+
+	public String moveString(String piece, int fromX, int fromY, int toX, int toY, String promotion) {
+		String fY = "" + (8 - fromY);
+		String tY = "" + (8 - toY);
+
+		String fX = "";
+		String tX = "";
+
+		switch (fromX) {
+			case (0): fX = "a";
+			case (1): fX = "b";
+			case (2): fX = "c";
+			case (3): fX = "d";
+			case (4): fX = "e";
+			case (5): fX = "f";
+			case (6): fX = "g";
+			case (7): fX = "h";
+		}
+
+		switch (toX) {
+			case (0): tX = "a";
+			case (1): tX = "b";
+			case (2): tX = "c";
+			case (3): tX = "d";
+			case (4): tX = "e";
+			case (5): tX = "f";
+			case (6): tX = "g";
+			case (7): tX = "h";
+		}
+
+		return piece + fX + fY + tX + tY + promotion;
+	}
 	
 	public ArrayList<Board> moveKings(){
 		ArrayList<Board> boards = new ArrayList<Board>();
@@ -125,6 +159,7 @@ public class Board {
 										Board board2 = new Board();
 										board2.board[i + operationY][j + operationX] = board2.board[i][j];
 										board2.board[i][j] = 0;
+										board2.lastMove = moveString("K", j, i, j + operationX, i + operationY, "");
 										System.out.println(board2.toString());
 
 										if (isBlack(this.board[i + operationY][j + operationX])) {
@@ -141,10 +176,11 @@ public class Board {
 
 									//castle
 									Board board2 = new Board();
-									board2.board[7][6] = K;
 									board2.board[7][4] = 0;
 									board2.board[7][5] = R;
+									board2.board[7][6] = K;
 									board2.board[7][7] = 0;
+									board2.lastMove = "Ke1g1";
 									boards.add(board2);
 									System.out.println(board2.toString());
 								}
@@ -197,6 +233,7 @@ public class Board {
 										Board board2 = new Board();
 										board2.board[i + operationY][j + operationX] = board2.board[i][j];
 										board2.board[i][j] = 0;
+										board2.lastMove = moveString("Q", j, i, j + operationX, i + operationY, "");
 										boards.add(board2);
 										System.out.println(board2.toString());
 										System.out.print(j);
@@ -252,6 +289,7 @@ public class Board {
 											Board board2 = new Board();
 											board2.board[i + operationY][j + operationX] = board2.board[i][j];
 											board2.board[i][j] = 0;
+											board2.lastMove = moveString("R", j, i, j + operationX, i + operationY, "");
 											boards.add(board2);
 											System.out.println(board2.toString());
 											System.out.print(j);
@@ -306,6 +344,7 @@ public class Board {
 											Board board2 = new Board();
 											board2.board[i + operationY][j + operationX] = board2.board[i][j];
 											board2.board[i][j] = 0;
+											board2.lastMove = moveString("B", j, i, j + operationX, i + operationY, "");
 											boards.add(board2);
 											System.out.println(board2.toString());
 											System.out.print(j);
@@ -315,7 +354,7 @@ public class Board {
 											System.out.println("");
 	
 											//we can still do the move if there is a black piece here, but we can go no further.
-											if (isBlack(this.board[i + operationY][j + operationX])) {
+											if (isBlack(this.board[board2.board[7][6] = K;i + operationY][j + operationX])) {
 												break;
 											}
 										}
@@ -358,6 +397,7 @@ public class Board {
 								Board board2 = new Board();
 								board2.board[i + operationY][j + operationX] = board2.board[i][j];
 								board2.board[i][j] = 0;
+								board2.lastMove = moveString("N", j, i, j + operationX, i + operationY, "");
 								boards.add(board2);
 								System.out.println(board2.toString());
 
@@ -413,9 +453,12 @@ public class Board {
 												}
 												board2.board[i + operationY][j + operationX] = board2.board[i][j];
 												board2.board[i][j] = 0;
+												board2.lastMove = moveString("P", j, i, j + operationX, i + operationY, "");
 												if((i + operationY) == 0){
 													board2.board[i + operationY][j + operationX] = Q;
+													board2.lastMove = moveString("P", j, i, j + operationX, i + operationY, "Q");
 												}
+												
 												boards.add(board2);
 												System.out.println(board2.toString());
 												System.out.print(j);
@@ -430,9 +473,12 @@ public class Board {
 											if(isBlack(this.board[i + operationY][j + operationX])){
 												board2.board[i + operationY][j + operationX] = board2.board[i][j];
 												board2.board[i][j] = 0;
+												board2.lastMove = moveString("P", j, i, j + operationX, i + operationY, "");
 												if((i + operationY) == 0){
 													board2.board[i + operationY][j + operationX] = Q;
+													board2.lastMove = moveString("P", j, i, j + operationX, i + operationY, "Q");
 												}
+												
 												boards.add(board2);
 												System.out.println(board2.toString());
 												System.out.print(j);
@@ -441,10 +487,6 @@ public class Board {
 												System.out.println(" +"+operationY);
 												System.out.println("");
 											}
-										}
-										//we can still do the move if there is a black piece here, but we can go no further.
-										if (isBlack(this.board[i + operationY][j + operationX])) {
-											break;
 										}
 									}
 								}catch(IndexOutOfBoundsException e){
@@ -550,6 +592,10 @@ public class Board {
 
 	public boolean isBlack(byte piece) {
 		return (piece > 10);
+	}
+
+	public int value() {
+		return 0;
 	}
 	
 	@Override
