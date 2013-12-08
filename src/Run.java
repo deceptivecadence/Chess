@@ -182,12 +182,12 @@ public class Run {
 			String temp = ourState.lastMove;
 			ourState = ourState.flipBoard();
 			ourState.lastMove = temp;
-			theirMoves.addAll(ourState.moveKings(white));
-			theirMoves.addAll(ourState.moveQueens(white));
-			theirMoves.addAll(ourState.moveBishops(white));
-			theirMoves.addAll(ourState.moveRooks(white));
-			theirMoves.addAll(ourState.moveKnights(white));
-			theirMoves.addAll(ourState.movePawns(white));
+			theirMoves.addAll(ourState.moveKings(!white));
+			theirMoves.addAll(ourState.moveQueens(!white));
+			theirMoves.addAll(ourState.moveBishops(!white));
+			theirMoves.addAll(ourState.moveRooks(!white));
+			theirMoves.addAll(ourState.moveKnights(!white));
+			theirMoves.addAll(ourState.movePawns(!white));
 			
 			int minValue = 99999;
 			for (Board theirState : theirMoves) {
