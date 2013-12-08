@@ -17,7 +17,7 @@ public class Run {
 		//System.out.println(b.flipBoard().toString());
 		//b.moveKings();
 		//b.moveQueens();\
-		b.moveKnights();
+		//b.moveKnights();
 		URLSendReceive butler = new URLSendReceive();
 		Date time = new Date();
 		Board currentState = new Board();
