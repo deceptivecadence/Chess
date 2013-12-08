@@ -665,7 +665,9 @@ public class Board {
 	public int value(boolean white) {
 		int wkings, wqueens, wrooks, wbishops, wknights, wpawns;
 		int bkings, bqueens, brooks, bbishops, bknights, bpawns;
+		int wBlockedPawns, bBlockedPawns;
 		
+		wBlockedPawns = bBlockedPawns = 0;
 		wkings = wqueens = wrooks = wbishops = wknights = wpawns = 0;
 		bkings = bqueens = brooks = bbishops = bknights = bpawns = 0;
 		
@@ -677,20 +679,20 @@ public class Board {
 					case (R): wrooks++; break;
 					case (B): wbishops++; break;
 					case (N): wknights++; break;
-					case (P): wpawns++; break;
+					case (P): wpawns++; if(this.board[i-1][j] !=0){wBlockedPawns += 1;} break;
 
 					case (bK): bkings++; break;
 					case (bQ): bqueens++; break;
 					case (bR): brooks++; break;
 					case (bB): bbishops++; break;
 					case (bN): bknights++; break;
-					case (bP): bpawns++; break;
+					case (bP): bpawns++; if(this.board[i+1][j] !=0){bBlockedPawns += 1;} break;
 				}
 			}
 		}
-
 		int val = 1000 * (wkings - bkings) + 100 * (wqueens - bqueens) + 20 * (wrooks - brooks) +
-			12 * (wbishops - bbishops) + 12 * (wknights - bknights) + 4 * (wpawns - bpawns);
+			12 * (wbishops - bbishops) + 12 * (wknights - bknights) + 4 * (wpawns - bpawns) - 
+			3 * (wBlockedPawns - bBlockedPawns);
 
 		val += Math.random();
 		
