@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 public class URLSendReceive {
 //<<<<<<< HEAD
-	String gameID = "502";
+	String gameID = "503";
 	String teamNumber = "1";
 	String teamSecret = "32c68cae";
 	//String teamNumber  ="2";
