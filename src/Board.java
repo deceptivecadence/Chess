@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 
 public class Board {
 	private byte K = 6;
@@ -99,7 +101,7 @@ public class Board {
 		}
 	}
 	
-	public void moveKings(){
+	public ArrayList<Board> moveKings(){
 		ArrayList<Board> boards = new ArrayList<Board>();
 		byte moveNumber = 1;
 		for (byte i=0; i<8; i++){
@@ -157,7 +159,7 @@ public class Board {
 	} 
 	
 	
-	public void moveQueens(){
+	public ArrayList<Board> moveQueens(){
 		ArrayList<Board> boards = new ArrayList<Board>();
 		byte moveNumber = 7;
 		for (byte i=0; i<8; i++){
@@ -224,7 +226,7 @@ public class Board {
 	}
 	
 	
-	public void moveRooks(){
+	public ArrayList<Board> moveRooks(){
 		ArrayList<Board> boards = new ArrayList<Board>();
 		byte moveNumber = 7;
 		for (byte i=0; i<8; i++){
@@ -278,7 +280,7 @@ public class Board {
 		return boards;
 	}
 	
-	public void moveBishops(){
+	public ArrayList<Board> moveBishops(){
 		ArrayList<Board> boards = new ArrayList<Board>();
 		byte moveNumber = 7;
 		for (byte i=0; i<8; i++){
@@ -332,7 +334,7 @@ public class Board {
 		return boards;
 	}
 
-	public void moveKnights(){
+	public ArrayList<Board> moveKnights(){
 		ArrayList<Board> boards = new ArrayList<Board>();
 		for (byte i=0; i<8; i++){
 			for (byte j=0; j<8; j++){//search entire board
@@ -377,7 +379,7 @@ public class Board {
 	}
 	
 	
-	public void movePawns(){
+	public ArrayList<Board> movePawns(){
 		ArrayList<Board> boards = new ArrayList<Board>();
 		byte moveNumber = 1;
 		for (byte i=0; i<8; i++){
@@ -483,7 +485,7 @@ public class Board {
 			//y isn't changing
 			else{
 				return bound[0] <= (x + oprX);
-			}ArrayList<Board> boards = new ArrayList<Board>();
+			}
 		}
 		//x is increasing
 		else if(oprX>0){
