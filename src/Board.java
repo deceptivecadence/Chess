@@ -113,9 +113,9 @@ public class Board {
 								operationX = (byte) (x*k);
 								operationY = (byte) (y*k);
 								try{
-									if (isWhite(this.board[i + operationY][j + operationX]) || 
+									if ((isWhite(this.board[i + operationY][j + operationX]) || 
 										(i + operationY < 0) || (i + operationY > 7) ||
-										(j + operationX < 0) || (j + operationX > 7)){
+										(j + operationX < 0) || (j + operationX > 7))){
 										break;
 									}
 									else {
@@ -131,6 +131,18 @@ public class Board {
 									//add board to "frontier" or wat do
 								}catch(IndexOutOfBoundsException e){
 									System.out.println("You dun fugged up");
+								}
+
+								if (i == 7 && j == 4 && this.board[7][7] == R &&
+									this.board[7][5] == 0 && this.board[7][6] == 0) {
+
+									//castle
+									Board board2 = new Board();
+									board2.board[7][6] = K;
+									board2.board[7][4] = 0;
+									board2.board[7][5] = R;
+									board2.board[7][7] = 0;
+									System.out.println(board2.toString());
 								}
 							}
 						}
