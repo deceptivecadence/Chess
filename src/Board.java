@@ -343,7 +343,7 @@ public class Board {
 		}
 		ArrayList<Board> boards = new ArrayList<Board>();
 		byte moveNumber = 7;
-		for (byte i=0; i<8; i++){
+		for (byte i=0; i<8; i++){return (piece < 10 && piece != 0);
 			for (byte j=0; j<8; j++){//search entire board
 				if(this.board[i][j] == piece){
 					byte operationX;
@@ -629,14 +629,22 @@ public class Board {
 
 	public boolean isOurs(byte piece, boolean white) {
 		if (white)
-			return (piece < 10 && piece != 0);
-		return !(piece < 10 && piece != 0);
+			return isWhite(piece);
+		return isBlack(piece);
 	}
 
 	public boolean isTheirs(byte piece, boolean white) {
 		if (white)
-			return (piece > 10);
-		return !(piece > 10);
+			return isBlack(piece);
+		return isWhite(piece);
+	}
+
+	public boolean isWhite(byte piece) {
+		return (piece < 10 && piece != 0);
+	}
+
+	public boolean isBlack(byte piece) {
+		return (piece > 10);
 	}
 
 	public int value(boolean white) {

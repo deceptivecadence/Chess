@@ -191,8 +191,8 @@ public class Run {
 			
 			int minValue = 99999;
 			for (Board theirState : theirMoves) {
-				if (theirState.value(true) < minValue) {
-					minValue = theirState.value(true);
+				if (theirState.value(white) < minValue) {
+					minValue = theirState.value(white);
 				}
 			}
 
