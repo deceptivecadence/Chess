@@ -3,6 +3,7 @@
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 
@@ -134,15 +135,20 @@ public class Run {
 						ourMove = piece + fX + fY + tX + tY + promotion;
 					}
 					*/
-					if(butler.urlSend(ourMove).getBoolean("result")){
-						System.out.println("YOU ZUCK BALLS");
+					JSONObject response = butler.urlSend(ourMove);
+					try{
+						if((boolean) response.get("result")){
+							System.out.println("YOU ZUCK BALLS");
+						}
+						else {
+							System.out.println(ourMove);
+							currentState.moveFromInput(ourMove);
+							currentState = currentState.flipBoard();
+							System.out.println(currentState);
+						}
 					}
-					else {
-						System.out.println(ourMove);
-					
-						currentState.moveFromInput(ourMove);
-						currentState = currentState.flipBoard();
-						System.out.println(currentState);
+					catch(JSONException e){
+						
 					}
 				}
 				
