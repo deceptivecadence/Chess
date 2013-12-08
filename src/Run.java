@@ -1,4 +1,4 @@
-//Andrew made most of this file. copyright 2013 andrew. ^(tm)
+//Andrew made most of this file. copyright 2013 andrew. ^(tm) == false;
 
 import java.util.ArrayList;
 import java.util.Date;
