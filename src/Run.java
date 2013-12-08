@@ -97,18 +97,18 @@ public class Run {
 							case "h": byteToCol = 7; break;
 						}
 
-						byteFromCol = 7 - byteFromCol;
-						byteFromRow = 7 - byteFromRow;
-						byteToCol = 7 - byteToCol;
-						byteToRow = 7 - byteToRow;
+						byteFromCol = (byte) (7 - byteFromCol);
+						byteFromRow = (byte) (7 - byteFromRow);
+						byteToCol = (byte) (7 - byteToCol);
+						byteToRow = (byte) (7 - byteToRow);
 
-						String fY = "" + (8 - fromY);
-						String tY = "" + (8 - toY);
+						String fY = "" + (8 - byteFromRow);
+						String tY = "" + (8 - byteToRow);
 
 						String fX = "";
 						String tX = "";
 
-						switch (fromX) {
+						switch (byteFromCol) {
 							case (0): fX = "a"; break;
 							case (1): fX = "b"; break;
 							case (2): fX = "c"; break;
@@ -119,7 +119,7 @@ public class Run {
 							case (7): fX = "h"; break;
 						}
 
-						switch (toX) {
+						switch (byteToCol) {
 							case (0): tX = "a"; break;
 							case (1): tX = "b"; break;
 							case (2): tX = "c"; break;
