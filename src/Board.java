@@ -499,6 +499,7 @@ public class Board {
 
 		from = move.substring(1, 3);
 		to = move.substring(3,5);
+		promotion = move.substring(5,6);
 		this.move(from, to, promotion);
 		return false;
 	}
