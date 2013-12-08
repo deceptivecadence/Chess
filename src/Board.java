@@ -694,7 +694,7 @@ public class Board {
 			12 * (wbishops - bbishops) + 12 * (wknights - bknights) + 4 * (wpawns - bpawns) - 
 			3 * (wBlockedPawns - bBlockedPawns);
 
-		val += Math.random();
+		val += Math.random() * 5;
 		
 		if (white)
 			return val;
