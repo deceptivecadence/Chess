@@ -134,7 +134,7 @@ public class Run {
 						ourMove = piece + fX + fY + tX + tY + promotion;
 					}
 					
-					if(butler.urlSend(ourMove).getString("message").substring(0,12).equals("invalid move")){
+					if(butler.urlSend(ourMove).getBoolean("result")){
 						System.out.println("YOU ZUCK BALLS");
 					}
 					else {
