@@ -117,8 +117,8 @@ public class Run {
 			//boolean prune = false;
 			int minValue = 99999;
 			for (Board theirState : theirMoves) {
-				if (theirState.value(white) < minValue) {
-					minValue = theirState.value(white);
+				if (theirState.value(true) < minValue) {
+					minValue = theirState.value(true);
 					/*if (minValue < maxValue) {
 						prune = true;
 						break;
