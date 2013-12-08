@@ -1,4 +1,3 @@
-import java.util.Arrays;
 
 public class Board {
 	private byte K = 6;
@@ -59,7 +58,7 @@ public class Board {
 		//board[3][3] = N;
 	}
 	
-	public void move(String from, String to){
+	public void move(String from, String to, String promotion){
 		byte byteFromCol  = -1;
 		byte byteToCol    = -1;
 		
@@ -90,6 +89,14 @@ public class Board {
 		byte piece = this.board[byteFromRow][byteFromCol];
 		this.board[byteFromRow][byteFromCol] = 0;
 		this.board[byteToRow][byteToCol] = piece;
+		if(!promotion.equals("")){
+			switch(promotion){
+				case "Q": this.board[byteToRow][byteToCol] = bQ;
+				case "R": this.board[byteToRow][byteToCol] = bQ;
+				case "B": this.board[byteToRow][byteToCol] = bB;
+				case "N": this.board[byteToRow][byteToCol] = bN;
+			}
+		}
 	}
 	
 	public void moveKings(){
@@ -477,13 +484,13 @@ public class Board {
 		String piece = "";
 		String from = "";
 		String to = "";
-		String optional = "";
+		String promotion = "";
 		//single piece move
 		if (move.length() == 5){
 			piece = move.substring(0, 1);
 			from = move.substring(1, 3);
 			to = move.substring(3,5);
-			this.move(from, to);
+			this.move(from, to, promotion);
 		}
 		return false;
 	}
