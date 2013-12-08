@@ -179,9 +179,9 @@ public class Run {
 		int maxValue = -99999;
 		for (Board ourState : ourMoves) {
 			ArrayList<Board> theirMoves = new ArrayList<Board>();
-			String temp = ourState.lastMove;
-			ourState = ourState.flipBoard();
-			ourState.lastMove = temp;
+			//String temp = ourState.lastMove;
+			//ourState = ourState.flipBoard();
+			//ourState.lastMove = temp;
 			theirMoves.addAll(ourState.moveKings(!white));
 			theirMoves.addAll(ourState.moveQueens(!white));
 			theirMoves.addAll(ourState.moveBishops(!white));
@@ -191,8 +191,8 @@ public class Run {
 			
 			int minValue = 99999;
 			for (Board theirState : theirMoves) {
-				if (theirState.flipBoard().value(white) < minValue) {
-					minValue = theirState.flipBoard().value(white);
+				if (theirState.value(white) < minValue) {
+					minValue = theirState.value(white);
 				}
 			}
 
