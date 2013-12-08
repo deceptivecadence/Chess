@@ -2,19 +2,19 @@ import java.util.ArrayList;
 
 
 public class Board {
-	private byte K = 6;
-	private byte Q = 5;
-	private byte R = 4;
-	private byte B = 3;
-	private byte N = 2;
-	private byte P = 1;
+	private final byte K = 6;
+	private final byte Q = 5;
+	private final byte R = 4;
+	private final byte B = 3;
+	private final byte N = 2;
+	private final byte P = 1;
 	
-	private byte bK = 6 + 10;
-	private byte bQ = 5 + 10;
-	private byte bR = 4 + 10;
-	private byte bB = 3 + 10;
-	private byte bN = 2 + 10;
-	private byte bP = 1 + 10;
+	private final byte bK = 6 + 10;
+	private final byte bQ = 5 + 10;
+	private final byte bR = 4 + 10;
+	private final byte bB = 3 + 10;
+	private final byte bN = 2 + 10;
+	private final byte bP = 1 + 10;
 	public byte[][] board = new byte[8][8];
 	//JSONArray pieceMapping = new JSONArray();
 
@@ -595,9 +595,12 @@ public class Board {
 	}
 
 	public int value() {
-		int wkings = wqueens = wrooks = wbishops = wknights = wpawns = 0;
-		int bkings = bqueens = brooks = bbishops = bknights = bpawns = 0;
-
+		int wkings, wqueens, wrooks, wbishops, wknights, wpawns;
+		int bkings, bqueens, brooks, bbishops, bknights, bpawns;
+		
+		wkings = wqueens = wrooks = wbishops = wknights = wpawns = 0;
+		bkings = bqueens = brooks = bbishops = bknights = bpawns = 0;
+		
 		for (int i = 0; i < 7; i += 1) {
 			for (int j = 0; j < 7; j += 1) {
 				switch (this.board[i][j]) {
