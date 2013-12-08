@@ -91,39 +91,39 @@ public class Run {
 
 	public static String findMove(Board currentState, boolean white) {
 		ArrayList<Board> ourMoves = new ArrayList<Board>();
-		ArrayList<ArrayList<Board>> tree = new ArrayList<ArrayList<Board>>();
+		//ArrayList<ArrayList<Board>> tree = new ArrayList<ArrayList<Board>>();
 		String bestMove = "nigga";
 		int maxValue = -99999;
 		int minValue = 99999;
 
 		//generate all possible states from current state, till depth 4
-		ourMoves.addAll(state.moveKings(white));
-		ourMoves.addAll(state.moveQueens(white));
-		ourMoves.addAll(state.moveBishops(white));
-		ourMoves.addAll(state.moveRooks(white));
-		ourMoves.addAll(state.moveKnights(white));
-		ourMoves.addAll(state.movePawns(white));
+		ourMoves.addAll(currentState.moveKings(white));
+		ourMoves.addAll(currentState.moveQueens(white));
+		ourMoves.addAll(currentState.moveBishops(white));
+		ourMoves.addAll(currentState.moveRooks(white));
+		ourMoves.addAll(currentState.moveKnights(white));
+		ourMoves.addAll(currentState.movePawns(white));
 
 		for (Board ourState : ourMoves) {
 			ArrayList<ArrayList<Board>> tree = new ArrayList<ArrayList<Board>>();
-			tree[0].add(ourState);
+			tree.get(0).add(ourState);
 			for (int i = 1; i < 5; i += 1) {
-				for (Board state : tree[i-1]) {
+				for (Board state : tree.get(i-1)) {
 					boolean ww = white;
 					if (i % 2 == 1)
 						ww = !white;
 				
-					tree[i].addAll(state.moveKings(ww));
-					tree[i].addAll(state.moveQueens(ww));
-					tree[i].addAll(state.moveBishops(ww));
-					tree[i].addAll(state.moveRooks(ww));
-					tree[i].addAll(state.moveKnights(ww));
-					tree[i].addAll(state.movePawns(ww));
+					tree.get(i).addAll(state.moveKings(ww));
+					tree.get(i).addAll(state.moveQueens(ww));
+					tree.get(i).addAll(state.moveBishops(ww));
+					tree.get(i).addAll(state.moveRooks(ww));
+					tree.get(i).addAll(state.moveKnights(ww));
+					tree.get(i).addAll(state.movePawns(ww));
 				}
 			}
 
 			//check scores from bottom of tree
-			for (Board state : tree[4]) {
+			for (Board state : tree.get(4)) {
 				if (state.value(white) < minValue) {
 					minValue = state.value(white);
 					/*if (minValue < maxValue) {
@@ -135,7 +135,7 @@ public class Run {
 
 			if (minValue > maxValue) {
 				maxValue = minValue;
-				bestMove = ourMove.lastMove;
+				bestMove = ourState.lastMove;
 				//besty = ourState.flipBoard();
 			}
 		}

@@ -673,7 +673,7 @@ public class Board {
 		
 		for (int i = 0; i < 7; i += 1) {
 			for (int j = 0; j < 7; j += 1) {
-				switch (this.board[i][j]) {
+				switch (this.board[i][j]) { 
 					case (K): wkings++; break;
 					case (Q): wqueens++; break;
 					case (R): wrooks++; break;
