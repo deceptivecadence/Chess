@@ -24,6 +24,7 @@ public class Run {
 		Board currentState = new Board();
 		boolean weAreWhite = true;
 		JSONObject json = butler.urlReceive(butler.pollURL);
+		System.out.println(json.toString());
 		if (json.get("ready").toString() == "true") {
 			//we are white.
 			weAreWhite = true;
@@ -49,6 +50,7 @@ public class Run {
 			
 			if (currentTime.getTime() - time.getTime() >= pingRate) {
 				json = butler.urlReceive(butler.pollURL);
+				System.out.println(json.toString());
 				if (json.get("ready").toString() == "true") {
 					secondsLeft = Float.parseFloat(json.get("secondsleft").toString());
 					lastMoveNumber = Integer.parseInt(json.get("lastmovenumber").toString());
