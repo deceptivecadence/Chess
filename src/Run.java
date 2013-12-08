@@ -174,7 +174,7 @@ public class Run {
 		ourMoves.addAll(currentState.movePawns(white));
 
 		//ArrayList<Board> anorLondo = new ArrayList<Board>();
-		String bestMove = "";
+		String bestMove = "nigga";
 		//Board besty = new Board();
 		int maxValue = -99999;
 		for (Board ourState : ourMoves) {
