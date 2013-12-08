@@ -63,7 +63,7 @@ public class Board {
 		byte byteToCol    = -1;
 		
 		byte byteFromRow   = (byte) (8 - Integer.parseInt(from.substring(1, 2)));
-		byte byteToRow     = (byte) (8 - Integer.parseInt(to.substring(1, 2)));;
+		byte byteToRow     = (byte) (8 - Integer.parseInt(to.substring(1, 2)));
 		switch(from.substring(0, 1)){
 			case "a": byteFromCol = 0; break;
 			case "b": byteFromCol = 1; break;
@@ -493,17 +493,13 @@ public class Board {
 	
 	//move will be PieceFrom(Col1Row1)To(Col2Row2)[promotion]
 	public Boolean moveFromInput(String move){
-		String piece = "";
 		String from = "";
 		String to = "";
 		String promotion = "";
-		//single piece move
-		if (move.length() == 5){
-			piece = move.substring(0, 1);
-			from = move.substring(1, 3);
-			to = move.substring(3,5);
-			this.move(from, to, promotion);
-		}
+
+		from = move.substring(1, 3);
+		to = move.substring(3,5);
+		this.move(from, to, promotion);
 		return false;
 	}
 	
