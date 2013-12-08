@@ -8,11 +8,18 @@ import org.json.JSONObject;
 
 public class URLSendReceive {
 //<<<<<<< HEAD
-	String gameID = "503";
+	String gameID = "504";
+//<<<<<<< HEAD
 	String teamNumber = "1";
 	String teamSecret = "32c68cae";
 	//String teamNumber  ="2";
 	//String teamSecret = "1a77594c";
+/*=======
+	//String teamNumber = "1";
+	//String teamSecret = "32c68cae";
+	String teamNumber  ="2";
+	String teamSecret = "1a77594c";
+>>>>>>> ab10b74f0dc42204860df1535c90410a4a737865
 /*=======
 
 	String gameID = "502";

@@ -136,12 +136,16 @@ public class Board {
 		return piece + fX + fY + tX + tY + promotion;
 	}
 	
-	public ArrayList<Board> moveKings(){
+	public ArrayList<Board> moveKings(boolean white){
+		byte piece = K;
+		if (!white) {
+			piece = bK;
+		}
 		ArrayList<Board> boards = new ArrayList<Board>();
 		byte moveNumber = 1;
 		for (byte i=0; i<8; i++){
 			for (byte j=0; j<8; j++){//search entire board
-				if(this.board[i][j] == K){
+				if(this.board[i][j] == piece){
 					byte operationX;
 					byte operationY;
 					
@@ -151,7 +155,7 @@ public class Board {
 								operationX = (byte) (x*k);
 								operationY = (byte) (y*k);
 								try{
-									if ((isWhite(this.board[i + operationY][j + operationX]) || 
+									if ((isOurs(this.board[i + operationY][j + operationX], white) || 
 										(i + operationY < 0) || (i + operationY > 7) ||
 										(j + operationX < 0) || (j + operationX > 7))){
 										break;
@@ -163,7 +167,7 @@ public class Board {
 										board2.lastMove = moveString("K", j, i, j + operationX, i + operationY, "");
 										//System.out.println(board2.toString());
 
-										if (isBlack(this.board[i + operationY][j + operationX])) {
+										if (isTheirs(this.board[i + operationY][j + operationX], white)) {
 											break;
 										}
 									}
@@ -172,7 +176,13 @@ public class Board {
 									//System.out.println("You dun fugged up");
 								}
 
-								if (i == 7 && j == 4 && this.board[7][7] == R &&
+								//PUT DIS MUTHAFUCKIN CASTLAN BAK IN.
+								//////////////////////////
+								/////////////////////////
+								/////////////////////////
+								////////////////////////////
+								
+								/*if (i == 7 && j == 4 && this.board[7][7] == R &&
 									this.board[7][5] == 0 && this.board[7][6] == 0) {
 
 									//castle
@@ -184,7 +194,7 @@ public class Board {
 									board2.lastMove = "Ke1g1";
 									boards.add(board2);
 									//System.out.println(board2.toString());
-								}
+								}*/
 							}
 						}
 					}
@@ -195,12 +205,16 @@ public class Board {
 	} 
 	
 	
-	public ArrayList<Board> moveQueens(){
+	public ArrayList<Board> moveQueens(boolean white){
+		byte piece = Q;
+		if (!white) {
+			piece = bQ;
+		}
 		ArrayList<Board> boards = new ArrayList<Board>();
 		byte moveNumber = 7;
 		for (byte i=0; i<8; i++){
 			for (byte j=0; j<8; j++){//search entire board
-				if(this.board[i][j] == Q){
+				if(this.board[i][j] == piece){
 					byte operationX;
 					byte operationY;
 					for(byte x=-1; x<2; x++){
@@ -211,7 +225,7 @@ public class Board {
 								operationX = (byte) (x*k);
 								operationY = (byte) (y*k);
 								try{
-									if (isWhite(this.board[i + operationY][j + operationX]) || 
+									if (isOurs(this.board[i + operationY][j + operationX], white) || 
 										(i + operationY < 0) || (i + operationY > 7) ||
 										(j + operationX < 0) || (j + operationX > 7)) {
 										//this square is as far as you can go
@@ -244,7 +258,7 @@ public class Board {
 										System.out.println("");*/
 
 										//we can still do the move if there is a black piece here, but we can go no further.
-										if (isBlack(this.board[i + operationY][j + operationX])) {
+										if (isTheirs(this.board[i + operationY][j + operationX], white)) {
 											break;
 										}
 										//}
@@ -263,12 +277,16 @@ public class Board {
 	}
 	
 	
-	public ArrayList<Board> moveRooks(){
+	public ArrayList<Board> moveRooks(boolean white){
+		byte piece = R;
+		if (!white) {
+			piece = bR;
+		}
 		ArrayList<Board> boards = new ArrayList<Board>();
 		byte moveNumber = 7;
 		for (byte i=0; i<8; i++){
 			for (byte j=0; j<8; j++){//search entire board
-				if(this.board[i][j] == R){
+				if(this.board[i][j] == piece){
 					byte operationX;
 					byte operationY;
 					for(byte x=-1; x<2; x++){
@@ -280,7 +298,7 @@ public class Board {
 								operationY = (byte) (y*k);
 								if(operationX==0||operationY==0){
 									try{
-										if (isWhite(this.board[i + operationY][j + operationX]) || 
+										if (isOurs(this.board[i + operationY][j + operationX], white) || 
 											(i + operationY < 0) || (i + operationY > 7) ||
 											(j + operationX < 0) || (j + operationX > 7)) {
 											break;
@@ -300,7 +318,7 @@ public class Board {
 											System.out.println("");*/
 	
 											//we can still do the move if there is a black piece here, but we can go no further.
-											if (isBlack(this.board[i + operationY][j + operationX])) {
+											if (isTheirs(this.board[i + operationY][j + operationX], white)) {
 												break;
 											}
 										}
@@ -318,15 +336,19 @@ public class Board {
 		return boards;
 	}
 	
-	public ArrayList<Board> moveBishops(){
+	public ArrayList<Board> moveBishops(boolean white){
+		byte piece = B;
+		if (!white) {
+			piece = bB;
+		}
 		ArrayList<Board> boards = new ArrayList<Board>();
 		byte moveNumber = 7;
 		for (byte i=0; i<8; i++){
 			for (byte j=0; j<8; j++){//search entire board
-				if(this.board[i][j] == B){
+				if(this.board[i][j] == piece){
 					byte operationX;
 					byte operationY;
-					for(byte x=-1; x<2; x++){
+					for(byte x=-boolean white1; x<2; x++){
 											
 						for(byte y=-1; y<2; y++){
 							
@@ -335,7 +357,7 @@ public class Board {
 								operationY = (byte) (y*k);
 								if(operationX!=0 && operationY!=0){
 									try{
-										if (isWhite(this.board[i + operationY][j + operationX]) || 
+										if (isOurs(this.board[i + operationY][j + operationX], white) || 
 											(i + operationY < 0) || (i + operationY > 7) ||
 											(j + operationX < 0) || (j + operationX > 7)) {
 											break;
@@ -355,7 +377,7 @@ public class Board {
 											System.out.println("");*/
 	
 											//we can still do the move if there is a black piece here, but we can go no further.
-											if (isBlack(this.board[i + operationY][j + operationX])) {
+											if (isTheirs(this.board[i + operationY][j + operationX], white)) {
 												break;
 											}
 										}
@@ -373,11 +395,15 @@ public class Board {
 		return boards;
 	}
 
-	public ArrayList<Board> moveKnights(){
+	public ArrayList<Board> moveKnights(boolean white){
+		byte piece = N;
+		if (!white) {
+			piece = bN;
+		}
 		ArrayList<Board> boards = new ArrayList<Board>();
 		for (byte i=0; i<8; i++){
 			for (byte j=0; j<8; j++){//search entire board
-				if(this.board[i][j] == N){
+				if(this.board[i][j] == piece){
 					byte operationX;
 					byte operationY;
 
@@ -389,7 +415,7 @@ public class Board {
 						operationX = coords[0];
 						operationY = coords[1];
 						try{
-							if (isWhite(this.board[i + operationY][j + operationX]) || 
+							if (isOurs(this.board[i + operationY][j + operationX], white) || 
 								(i + operationY < 0) || (i + operationY > 7) ||
 								(j + operationX < 0) || (j + operationX > 7)){
 								continue;
@@ -402,7 +428,7 @@ public class Board {
 								boards.add(board2);
 								//System.out.println(board2.toString());
 
-								if (isBlack(this.board[i + operationY][j + operationX])) {
+								if (isTheirs(this.board[i + operationY][j + operationX], white)) {
 									continue;
 								}
 							}
@@ -419,12 +445,16 @@ public class Board {
 	}
 	
 	
-	public ArrayList<Board> movePawns(){
+	public ArrayList<Board> movePawns(boolean white){
+		byte piece = P;
+		if (!white) {
+			piece = bP;
+		}
 		ArrayList<Board> boards = new ArrayList<Board>();
 		byte moveNumber = 1;
 		for (byte i=0; i<8; i++){
 			for (byte j=0; j<8; j++){//search entire board
-				if(this.board[i][j] == P){
+				if(this.board[i][j] == piece){
 					byte operationX;
 					byte operationY;
 					for(byte x=-1; x<2; x++){
@@ -436,14 +466,14 @@ public class Board {
 								operationY = (byte) (y*k);
 
 								try{
-									if (isWhite(this.board[i + operationY][j + operationX]) || 
+									if (isOurs(this.board[i + operationY][j + operationX], white) || 
 										(i + operationY < 0) || (i + operationY > 7) ||
 										(j + operationX < 0) || (j + operationX > 7)) {
 										break;
 									}
 									else{
 										Board board2 = new Board();
-										if(operationX==0 && !isBlack(this.board[i + operationY][j + operationX])){
+										if(operationX==0 && !isTheirs(this.board[i + operationY][j + operationX], white)){
 											for (byte p=0;p<2;p++){
 												board2 = new Board();
 												if(i==6 && operationY != -2){
@@ -457,6 +487,9 @@ public class Board {
 												board2.lastMove = moveString("P", j, i, j + operationX, i + operationY, "");
 												if((i + operationY) == 0){
 													board2.board[i + operationY][j + operationX] = Q;
+													if (!white) {
+														board2.board[i + operationY][j + operationX] = bQ;
+													}
 													board2.lastMove = moveString("P", j, i, j + operationX, i + operationY, "Q");
 												}
 												
@@ -469,14 +502,17 @@ public class Board {
 												System.out.println("");*/
 											}
 										}
-										else if (operationX !=0 && isBlack(this.board[i + operationY][j + operationX])){
+										else if (operationX !=0 && isTheirs(this.board[i + operationY][j + operationX], white)){
 											board2 = new Board();
-											if(isBlack(this.board[i + operationY][j + operationX])){
+											if(isTheirs(this.board[i + operationY][j + operationX], white)){
 												board2.board[i + operationY][j + operationX] = board2.board[i][j];
 												board2.board[i][j] = 0;
 												board2.lastMove = moveString("P", j, i, j + operationX, i + operationY, "");
 												if((i + operationY) == 0){
 													board2.board[i + operationY][j + operationX] = Q;
+													if (!white) {
+														board2.board[i + operationY][j + operationX] = bQ;
+													}
 													board2.lastMove = moveString("P", j, i, j + operationX, i + operationY, "Q");
 												}
 												
@@ -591,15 +627,19 @@ public class Board {
 		return newBoard;
 	}
 
-	public boolean isWhite(byte piece) {
-		return (piece < 10 && piece != 0);
+	public boolean isOurs(byte piece, boolean white) {
+		if (white)
+			return (piece < 10 && piece != 0);
+		return !(piece < 10 && piece != 0);
 	}
 
-	public boolean isBlack(byte piece) {
-		return (piece > 10);
+	public boolean isTheirs(byte piece, boolean white) {.
+		if (white)
+			return (piece > 10);
+		return !(piece > 10);
 	}
 
-	public int value() {
+	public int value(boolean white) {
 		int wkings, wqueens, wrooks, wbishops, wknights, wpawns;
 		int bkings, bqueens, brooks, bbishops, bknights, bpawns;
 		
@@ -625,9 +665,13 @@ public class Board {
 				}
 			}
 		}
-		
-		return 1000 * (wkings - bkings) + 100 * (wqueens - bqueens) + 20 * (wrooks - brooks) +
+
+		int val = 1000 * (wkings - bkings) + 100 * (wqueens - bqueens) + 20 * (wrooks - brooks) +
 			12 * (wbishops - bbishops) + 12 * (wknights - bknights) + 4 * (wpawns - bpawns);
+		
+		if (white)
+			return val;
+		return -val;
 	}
 	
 	@Override

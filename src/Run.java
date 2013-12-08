@@ -21,21 +21,21 @@ public class Run {
 		URLSendReceive butler = new URLSendReceive();
 		Date time = new Date();
 		Board currentState = new Board();
-		boolean weAreBlack = false;
+		boolean weAreWhite = true;
 		JSONObject json = butler.urlReceive(butler.pollURL);
 		if (json.get("ready").toString() == "true") {
 			//we are white.
-			weAreBlack = false;
-			String ourMove = findMove(currentState);
+			weAreWhite = true;
+			String ourMove = findMove(currentState, weAreWhite);
 			butler.urlSend(ourMove);
 
 			System.out.println("~~~~~~ " + ourMove);
 			currentState.moveFromInput(ourMove);
-			currentState = currentState.flipBoard();
+			//currentState = currentState.flipBoard();
 		}
 		else {
-			weAreBlack = true;
-			currentState = currentState.flipBoard();
+			weAreWhite = false;
+			//currentState = currentState.flipBoard();
 		}
 		
 		while (true) {
@@ -55,8 +55,8 @@ public class Run {
 					currentState = currentState.flipBoard();
 					//do a move
 
-					ourMove = findMove(currentState);
-					if (weAreBlack) {
+					ourMove = findMove(currentState, weAreWhite);
+					/*if (weAreBlack) {
 						String piece = "";
 						String from = "";
 						String to = "";
@@ -134,7 +134,7 @@ public class Run {
 						ourMove = piece + fX + fY + tX + tY + promotion;
 					}
 					
-					if(butler.urlSend(ourMove).getString("message").substring(0,12).equals("invalid move")){
+					if(butler.urlSend(ourMove).getBoolean("result")){
 						System.out.println("YOU ZUCK BALLS");
 					}
 					else {
@@ -143,7 +143,7 @@ public class Run {
 						currentState.moveFromInput(ourMove);
 						currentState = currentState.flipBoard();
 						System.out.println(currentState);
-					}
+					}*/
 				}
 				
 				time = new Date();
@@ -155,14 +155,14 @@ public class Run {
 		}
 	}
 
-	public static String findMove(Board currentState) {
+	public static String findMove(Board currentState, boolean white) {
 		ArrayList<Board> ourMoves = new ArrayList<Board>();
-		ourMoves.addAll(currentState.moveKings());
-		ourMoves.addAll(currentState.moveQueens());
-		ourMoves.addAll(currentState.moveBishops());
-		ourMoves.addAll(currentState.moveRooks());
-		ourMoves.addAll(currentState.moveKnights());
-		ourMoves.addAll(currentState.movePawns());
+		ourMoves.addAll(currentState.moveKings(white));
+		ourMoves.addAll(currentState.moveQueens(white));
+		ourMoves.addAll(currentState.moveBishops(white));
+		ourMoves.addAll(currentState.moveRooks(white));
+		ourMoves.addAll(currentState.moveKnights(white));
+		ourMoves.addAll(currentState.movePawns(white));
 
 		//ArrayList<Board> anorLondo = new ArrayList<Board>();
 		String bestMove = "";
@@ -173,17 +173,17 @@ public class Run {
 			String temp = ourState.lastMove;
 			ourState = ourState.flipBoard();
 			ourState.lastMove = temp;
-			theirMoves.addAll(ourState.moveKings());
-			theirMoves.addAll(ourState.moveQueens());
-			theirMoves.addAll(ourState.moveBishops());
-			theirMoves.addAll(ourState.moveRooks());
-			theirMoves.addAll(ourState.moveKnights());
-			theirMoves.addAll(ourState.movePawns());
+			theirMoves.addAll(ourState.moveKings(white));
+			theirMoves.addAll(ourState.moveQueens(white));
+			theirMoves.addAll(ourState.moveBishops(white));
+			theirMoves.addAll(ourState.moveRooks(white));
+			theirMoves.addAll(ourState.moveKnights(white));
+			theirMoves.addAll(ourState.movePawns(white));
 			
 			int minValue = 99999;
 			for (Board theirState : theirMoves) {
-				if (theirState.flipBoard().value() < minValue) {
-					minValue = theirState.flipBoard().value();
+				if (theirState.flipBoard().value(white) < minValue) {
+					minValue = theirState.flipBoard().value(white);
 				}
 			}
 
