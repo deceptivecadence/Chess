@@ -137,6 +137,7 @@ public class Run {
 					}
 					*/
 					JSONObject response = butler.urlSend(ourMove);
+					System.out.println(ourMove);
 					System.out.println(response.toString());
 					try{
 						if((boolean) response.get("result")){
