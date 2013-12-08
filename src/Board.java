@@ -595,6 +595,11 @@ public class Board {
 	}
 
 	public int value() {
+		for (int i = 0; i < 7; i += 1) {
+			for (int j = 0; j < 7; j += 1) {
+				
+			}
+		}
 		return 0;
 	}
 	
