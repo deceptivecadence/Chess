@@ -100,6 +100,7 @@ public class Board {
 	}
 	
 	public void moveKings(){
+		ArrayList<Board> boards = new ArrayList<Board>();
 		byte moveNumber = 1;
 		for (byte i=0; i<8; i++){
 			for (byte j=0; j<8; j++){//search entire board
@@ -142,6 +143,7 @@ public class Board {
 									board2.board[7][4] = 0;
 									board2.board[7][5] = R;
 									board2.board[7][7] = 0;
+									boards.add(board2);
 									System.out.println(board2.toString());
 								}
 							}
@@ -150,10 +152,13 @@ public class Board {
 				}
 			}
 		}
+
+		return boards;
 	} 
 	
 	
 	public void moveQueens(){
+		ArrayList<Board> boards = new ArrayList<Board>();
 		byte moveNumber = 7;
 		for (byte i=0; i<8; i++){
 			for (byte j=0; j<8; j++){//search entire board
@@ -191,6 +196,7 @@ public class Board {
 										Board board2 = new Board();
 										board2.board[i + operationY][j + operationX] = board2.board[i][j];
 										board2.board[i][j] = 0;
+										boards.add(board2);
 										System.out.println(board2.toString());
 										System.out.print(j);
 										System.out.print(" +"+operationX);
@@ -213,10 +219,13 @@ public class Board {
 				}
 			}
 		}
+
+		return boards;
 	}
 	
 	
 	public void moveRooks(){
+		ArrayList<Board> boards = new ArrayList<Board>();
 		byte moveNumber = 7;
 		for (byte i=0; i<8; i++){
 			for (byte j=0; j<8; j++){//search entire board
@@ -242,6 +251,7 @@ public class Board {
 											Board board2 = new Board();
 											board2.board[i + operationY][j + operationX] = board2.board[i][j];
 											board2.board[i][j] = 0;
+											boards.add(board2);
 											System.out.println(board2.toString());
 											System.out.print(j);
 											System.out.print(" +"+operationX);
@@ -264,9 +274,12 @@ public class Board {
 				}
 			}
 		}
+
+		return boards;
 	}
 	
 	public void moveBishops(){
+		ArrayList<Board> boards = new ArrayList<Board>();
 		byte moveNumber = 7;
 		for (byte i=0; i<8; i++){
 			for (byte j=0; j<8; j++){//search entire board
@@ -292,6 +305,7 @@ public class Board {
 											Board board2 = new Board();
 											board2.board[i + operationY][j + operationX] = board2.board[i][j];
 											board2.board[i][j] = 0;
+											boards.add(board2);
 											System.out.println(board2.toString());
 											System.out.print(j);
 											System.out.print(" +"+operationX);
@@ -314,9 +328,12 @@ public class Board {
 				}
 			}
 		}
+
+		return boards;
 	}
 
 	public void moveKnights(){
+		ArrayList<Board> boards = new ArrayList<Board>();
 		for (byte i=0; i<8; i++){
 			for (byte j=0; j<8; j++){//search entire board
 				if(this.board[i][j] == N){
@@ -340,6 +357,7 @@ public class Board {
 								Board board2 = new Board();
 								board2.board[i + operationY][j + operationX] = board2.board[i][j];
 								board2.board[i][j] = 0;
+								boards.add(board2);
 								System.out.println(board2.toString());
 
 								if (isBlack(this.board[i + operationY][j + operationX])) {
@@ -354,10 +372,13 @@ public class Board {
 				}
 			}
 		}
+
+		return boards;
 	}
 	
 	
 	public void movePawns(){
+		ArrayList<Board> boards = new ArrayList<Board>();
 		byte moveNumber = 1;
 		for (byte i=0; i<8; i++){
 			for (byte j=0; j<8; j++){//search entire board
@@ -394,6 +415,7 @@ public class Board {
 												if((i + operationY) == 0){
 													board2.board[i + operationY][j + operationX] = Q;
 												}
+												boards.add(board2);
 												System.out.println(board2.toString());
 												System.out.print(j);
 												System.out.print(" +"+operationX);
@@ -410,6 +432,7 @@ public class Board {
 												if((i + operationY) == 0){
 													board2.board[i + operationY][j + operationX] = Q;
 												}
+												boards.add(board2);
 												System.out.println(board2.toString());
 												System.out.print(j);
 												System.out.print(" +"+operationX);
@@ -432,6 +455,8 @@ public class Board {
 				}
 			}
 		}
+
+		return boards;
 	}
 	
 	
@@ -458,7 +483,7 @@ public class Board {
 			//y isn't changing
 			else{
 				return bound[0] <= (x + oprX);
-			}
+			}ArrayList<Board> boards = new ArrayList<Board>();
 		}
 		//x is increasing
 		else if(oprX>0){
