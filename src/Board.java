@@ -343,7 +343,7 @@ public class Board {
 		}
 		ArrayList<Board> boards = new ArrayList<Board>();
 		byte moveNumber = 7;
-		for (byte i=0; i<8; i++){return (piece < 10 && piece != 0);
+		for (byte i=0; i<8; i++){
 			for (byte j=0; j<8; j++){//search entire board
 				if(this.board[i][j] == piece){
 					byte operationX;
