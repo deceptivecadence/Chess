@@ -109,11 +109,12 @@ public class Run {
 			tree.add(new ArrayList<Board>());
 			tree.get(0).add(ourState);
 			for (int i = 1; i < 5; i += 1) {
+				tree.add(new ArrayList<Board>());
 				for (Board state : tree.get(i-1)) {
 					boolean ww = white;
 					if (i % 2 == 1)
 						ww = !white;
-				
+
 					tree.get(i).addAll(state.moveKings(ww));
 					tree.get(i).addAll(state.moveQueens(ww));
 					tree.get(i).addAll(state.moveBishops(ww));
