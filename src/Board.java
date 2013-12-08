@@ -595,12 +595,31 @@ public class Board {
 	}
 
 	public int value() {
+		int wkings = wqueens = wrooks = wbishops = wknights = wpawns = 0;
+		int bkings = bqueens = brooks = bbishops = bknights = bpawns = 0;
+
 		for (int i = 0; i < 7; i += 1) {
 			for (int j = 0; j < 7; j += 1) {
-				
+				switch (this.board[i][j]) {
+					case (K): wkings++; break;
+					case (Q): wqueens++; break;
+					case (R): wrooks++; break;
+					case (B): wbishops++; break;
+					case (N): wknights++; break;
+					case (P): wpawns++; break;
+
+					case (bK): bkings++; break;
+					case (bQ): bqueens++; break;
+					case (bR): brooks++; break;
+					case (bB): bbishops++; break;
+					case (bN): bknights++; break;
+					case (bP): bpawns++; break;
+				}
 			}
 		}
-		return 0;
+		
+		return 1000 * (wkings - bkings) + 100 * (wqueens - bqueens) + 20 * (wrooks - brooks) +
+			12 * (wbishops - bbishops) + 12 * (wknights - bknights) + 4 * (wpawns - bpawns);
 	}
 	
 	@Override
