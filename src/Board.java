@@ -354,7 +354,7 @@ public class Board {
 											System.out.println("");
 	
 											//we can still do the move if there is a black piece here, but we can go no further.
-											if (isBlack(this.board[board2.board[7][6] = K;i + operationY][j + operationX])) {
+											if (isBlack(this.board[i + operationY][j + operationX])) {
 												break;
 											}
 										}
