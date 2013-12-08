@@ -450,6 +450,11 @@ public class Board {
 		if (!white) {
 			piece = bP;
 		}
+		int promoSpot = 0;
+		if (!white) {
+			promoSpot = 7;
+		}
+		
 		ArrayList<Board> boards = new ArrayList<Board>();
 		byte moveNumber = 1;
 		for (byte i=0; i<8; i++){
@@ -477,18 +482,26 @@ public class Board {
 								else{
 									Board board2 = new Board();
 									if(operationX==0 && !isTheirs(this.board[i + operationY][j + operationX], white)){
-										for (byte p=0;p<2;p++){
+										for (int p=0;p<2;p++){
 											board2 = new Board();
-											if(i==6 && operationY != -2){
-												operationY = -2;
+											
+											int startSpot = 6;
+											if (!white) {
+												startSpot = 1;
 											}
-											else{
-												operationY = -1;
+											if (p == 1){
+												if (i == startSpot)
+													operationY *= 2;
+												else {
+													continue;
+												}
 											}
+											
 											board2.board[i + operationY][j + operationX] = board2.board[i][j];
 											board2.board[i][j] = 0;
 											board2.lastMove = moveString("P", j, i, j + operationX, i + operationY, "");
-											if((i + operationY) == 0){
+
+											if((i + operationY) == promoSpot){
 												board2.board[i + operationY][j + operationX] = Q;
 												if (!white) {
 													board2.board[i + operationY][j + operationX] = bQ;
@@ -511,7 +524,7 @@ public class Board {
 											board2.board[i + operationY][j + operationX] = board2.board[i][j];
 											board2.board[i][j] = 0;
 											board2.lastMove = moveString("P", j, i, j + operationX, i + operationY, "");
-											if((i + operationY) == 0){
+											if((i + operationY) == promoSpot){
 												board2.board[i + operationY][j + operationX] = Q;
 												if (!white) {
 													board2.board[i + operationY][j + operationX] = bQ;
