@@ -21,11 +21,10 @@ public class Run {
 		URLSendReceive butler = new URLSendReceive();
 		Date time = new Date();
 		Board currentState = new Board();
-
 		JSONObject json = butler.urlReceive(butler.pollURL);
 			if (json.get("ready").toString() == "true") {
 				//we are white.
-				ourMove = findMove(currentState);
+				String ourMove = findMove(currentState);
 				butler.urlSend(ourMove);
 				
 				currentState.moveFromInput(ourMove);
@@ -68,7 +67,7 @@ public class Run {
 		}
 	}
 
-	public String findMove(currentState) {
+	public static String findMove(Board currentState) {
 		ArrayList<Board> ourMoves = new ArrayList<Board>();
 		ourMoves.addAll(currentState.moveKings());
 		ourMoves.addAll(currentState.moveQueens());
