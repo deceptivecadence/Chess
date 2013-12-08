@@ -459,76 +459,78 @@ public class Board {
 					byte operationY;
 					for(byte x=-1; x<2; x++){
 											
-						for(byte y=-1; y<0; y++){ 
+						if (white)
+							y = -1;
+						else
+							y = 1;
 							
-							for(byte k=1; k<=moveNumber; k++){//degree of movement (spaces away from original spot)
-								operationX = (byte) (x*k);
-								operationY = (byte) (y*k);
+						for(byte k=1; k<=moveNumber; k++){//degree of movement (spaces away from original spot)
+							operationX = (byte) (x*k);
+							operationY = (byte) (y*k);
 
-								try{
-									if (isOurs(this.board[i + operationY][j + operationX], white) || 
-										(i + operationY < 0) || (i + operationY > 7) ||
-										(j + operationX < 0) || (j + operationX > 7)) {
-										break;
-									}
-									else{
-										Board board2 = new Board();
-										if(operationX==0 && !isTheirs(this.board[i + operationY][j + operationX], white)){
-											for (byte p=0;p<2;p++){
-												board2 = new Board();
-												if(i==6 && operationY != -2){
-													operationY = -2;
-												}
-												else{
-													operationY = -1;
-												}
-												board2.board[i + operationY][j + operationX] = board2.board[i][j];
-												board2.board[i][j] = 0;
-												board2.lastMove = moveString("P", j, i, j + operationX, i + operationY, "");
-												if((i + operationY) == 0){
-													board2.board[i + operationY][j + operationX] = Q;
-													if (!white) {
-														board2.board[i + operationY][j + operationX] = bQ;
-													}
-													board2.lastMove = moveString("P", j, i, j + operationX, i + operationY, "Q");
-												}
-												
-												boards.add(board2);
-												/*System.out.println(board2.toString());
-												System.out.print(j);
-												System.out.print(" +"+operationX);
-												System.out.print(", "+i);
-												System.out.println(" +"+operationY);
-												System.out.println("");*/
-											}
-										}
-										else if (operationX !=0 && isTheirs(this.board[i + operationY][j + operationX], white)){
-											board2 = new Board();
-											if(isTheirs(this.board[i + operationY][j + operationX], white)){
-												board2.board[i + operationY][j + operationX] = board2.board[i][j];
-												board2.board[i][j] = 0;
-												board2.lastMove = moveString("P", j, i, j + operationX, i + operationY, "");
-												if((i + operationY) == 0){
-													board2.board[i + operationY][j + operationX] = Q;
-													if (!white) {
-														board2.board[i + operationY][j + operationX] = bQ;
-													}
-													board2.lastMove = moveString("P", j, i, j + operationX, i + operationY, "Q");
-												}
-												
-												boards.add(board2);
-												/*System.out.println(board2.toString());
-												System.out.print(j);
-												System.out.print(" +"+operationX);
-												System.out.print(", "+i);
-												System.out.println(" +"+operationY);
-												System.out.println("");*/
-											}
-										}
-									}
-								}catch(IndexOutOfBoundsException e){
-									//System.out.println("You dun fugged up");
+							try{
+								if (isOurs(this.board[i + operationY][j + operationX], white) || 
+									(i + operationY < 0) || (i + operationY > 7) ||
+									(j + operationX < 0) || (j + operationX > 7)) {
+									break;
 								}
+								else{
+									Board board2 = new Board();
+									if(operationX==0 && !isTheirs(this.board[i + operationY][j + operationX], white)){
+										for (byte p=0;p<2;p++){
+											board2 = new Board();
+											if(i==6 && operationY != -2){
+												operationY = -2;
+											}
+											else{
+												operationY = -1;
+											}
+											board2.board[i + operationY][j + operationX] = board2.board[i][j];
+											board2.board[i][j] = 0;
+											board2.lastMove = moveString("P", j, i, j + operationX, i + operationY, "");
+											if((i + operationY) == 0){
+												board2.board[i + operationY][j + operationX] = Q;
+												if (!white) {
+													board2.board[i + operationY][j + operationX] = bQ;
+												}
+												board2.lastMove = moveString("P", j, i, j + operationX, i + operationY, "Q");
+											}
+											
+											boards.add(board2);
+											/*System.out.println(board2.toString());
+											System.out.print(j);
+											System.out.print(" +"+operationX);
+											System.out.print(", "+i);
+											System.out.println(" +"+operationY);
+											System.out.println("");*/
+										}
+									}
+									else if (operationX !=0 && isTheirs(this.board[i + operationY][j + operationX], white)){
+										board2 = new Board();
+										if(isTheirs(this.board[i + operationY][j + operationX], white)){
+											board2.board[i + operationY][j + operationX] = board2.board[i][j];
+											board2.board[i][j] = 0;
+											board2.lastMove = moveString("P", j, i, j + operationX, i + operationY, "");
+											if((i + operationY) == 0){
+												board2.board[i + operationY][j + operationX] = Q;
+												if (!white) {
+													board2.board[i + operationY][j + operationX] = bQ;
+												}
+												board2.lastMove = moveString("P", j, i, j + operationX, i + operationY, "Q");
+											}
+											
+											boards.add(board2);
+											/*System.out.println(board2.toString());
+											System.out.print(j);
+											System.out.print(" +"+operationX);
+											System.out.print(", "+i);
+											System.out.println(" +"+operationY);
+											System.out.println("");*/
+										}
+									}
+								}
+							}catch(IndexOutOfBoundsException e){
+								//System.out.println("You dun fugged up");
 							}
 						}
 					}
