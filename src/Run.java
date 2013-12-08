@@ -140,7 +140,7 @@ public class Run {
 					System.out.println(ourMove);
 					System.out.println(response.toString());
 					try{
-						if((boolean) response.get("result")){
+						if(!(boolean) response.get("result")){
 							System.out.println("YOU ZUCK BALLS");
 						}
 						else {
