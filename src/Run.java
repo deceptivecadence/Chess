@@ -114,21 +114,21 @@ public class Run {
 			theirMoves.addAll(ourState.moveKnights(!white));
 			theirMoves.addAll(ourState.movePawns(!white));
 
-			boolean prune = false;
+			//boolean prune = false;
 			int minValue = 99999;
 			for (Board theirState : theirMoves) {
 				if (theirState.value(white) < minValue) {
 					minValue = theirState.value(white);
-					if (minValue < maxValue) {
+					/*if (minValue < maxValue) {
 						prune = true;
 						break;
-					}
+					}*/
 				}
 			}
 
-			if (prune) {
+			/*if (prune) {
 				continue;
-			}
+			}*/
 
 			if (minValue > maxValue) {
 				maxValue = minValue;
