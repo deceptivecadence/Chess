@@ -1,4 +1,4 @@
-//Andrew made most of this file. copyright 2013 andrew. ^(tm)
+//Andrew made most of this file. copyright 2013 andrew. ^(tm) == false;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,19 +21,22 @@ public class Run {
 		URLSendReceive butler = new URLSendReceive();
 		Date time = new Date();
 		Board currentState = new Board();
+		boolean weAreBlack = false;
 		JSONObject json = butler.urlReceive(butler.pollURL);
-			if (json.get("ready").toString() == "true") {
-				//we are white.
-				String ourMove = findMove(currentState);
-				butler.urlSend(ourMove);
+		if (json.get("ready").toString() == "true") {
+			//we are white.
+			weAreBlack = false;
+			String ourMove = findMove(currentState);
+			butler.urlSend(ourMove);
 
-				System.out.println("~~~~~~ " + ourMove);
-				currentState.moveFromInput(ourMove);
-				currentState = currentState.flipBoard();
-			}
-			else {
-				currentState = currentState.flipBoard();
-			}
+			System.out.println("~~~~~~ " + ourMove);
+			currentState.moveFromInput(ourMove);
+			currentState = currentState.flipBoard();
+		}
+		else {
+			weAreBlack = true;
+			currentState = currentState.flipBoard();
+		}
 		
 		while (true) {
 			Date currentTime = new Date();
@@ -53,12 +56,94 @@ public class Run {
 					//do a move
 
 					ourMove = findMove(currentState);
-					butler.urlSend(ourMove);
-					System.out.println(ourMove);
+					if (weAreBlack) {
+						String piece = "";
+						String from = "";
+						String to = "";
+						String promotion = "";
+
+						piece = ourMove.substring(0, 1);
+						from = ourMove.substring(1, 3);
+						to = ourMove.substring(3,5);
+						if (ourMove.length() > 5) {
+							promotion = ourMove.substring(5,6);
+						}
+
+						byte byteFromCol  = -1;
+						byte byteToCol    = -1;
+		
+						byte byteFromRow   = (byte) (8 - Integer.parseInt(from.substring(1, 2)));
+						byte byteToRow     = (byte) (8 - Integer.parseInt(to.substring(1, 2)));
+						
+						switch(from.substring(0, 1)){
+							case "a": byteFromCol = 0; break;
+							case "b": byteFromCol = 1; break;
+							case "c": byteFromCol = 2; break;
+							case "d": byteFromCol = 3; break;
+							case "e": byteFromCol = 4; break;
+							case "f": byteFromCol = 5; break;
+							case "g": byteFromCol = 6; break;
+							case "h": byteFromCol = 7; break;
+						}
+		
+						switch(to.substring(0, 1)){
+							case "a": byteToCol = 0; break;
+							case "b": byteToCol = 1; break;
+							case "c": byteToCol = 2; break;
+							case "d": byteToCol = 3; break;
+							case "e": byteToCol = 4; break;
+							case "f": byteToCol = 5; break;
+							case "g": byteToCol = 6; break;
+							case "h": byteToCol = 7; break;
+						}
+
+						byteFromCol = 7 - byteFromCol;
+						byteFromRow = 7 - byteFromRow;
+						byteToCol = 7 - byteToCol;
+						byteToRow = 7 - byteToRow;
+
+						String fY = "" + (8 - fromY);
+						String tY = "" + (8 - toY);
+
+						String fX = "";
+						String tX = "";
+
+						switch (fromX) {
+							case (0): fX = "a"; break;
+							case (1): fX = "b"; break;
+							case (2): fX = "c"; break;
+							case (3): fX = "d"; break;
+							case (4): fX = "e"; break;
+							case (5): fX = "f"; break;
+							case (6): fX = "g"; break;
+							case (7): fX = "h"; break;
+						}
+
+						switch (toX) {
+							case (0): tX = "a"; break;
+							case (1): tX = "b"; break;
+							case (2): tX = "c"; break;
+							case (3): tX = "d"; break;
+							case (4): tX = "e"; break;
+							case (5): tX = "f"; break;
+							case (6): tX = "g"; break;
+							case (7): tX = "h"; break;
+						}
+
+						//System.out.println(piece + fX + fY + tX + tY + promotion);
+						ourMove = piece + fX + fY + tX + tY + promotion;
+					}
 					
-					currentState.moveFromInput(ourMove);
-					currentState = currentState.flipBoard();
-					System.out.println(currentState);
+					if(butler.urlSend(ourMove).getString("message").substring(0,12).equals("invalid move")){
+						System.out.println("YOU ZUCK BALLS");
+					}
+					else {
+						System.out.println(ourMove);
+					
+						currentState.moveFromInput(ourMove);
+						currentState = currentState.flipBoard();
+						System.out.println(currentState);
+					}
 				}
 				
 				time = new Date();
