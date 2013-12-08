@@ -127,7 +127,7 @@ public class Run {
 			}
 
 			if (prune) {
-				break;
+				continue;
 			}
 
 			if (minValue > maxValue) {
