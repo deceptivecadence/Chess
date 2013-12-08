@@ -1,5 +1,6 @@
 //Andrew made most of this file. copyright 2013 andrew. ^(tm)
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.json.JSONObject;
@@ -20,7 +21,6 @@ public class Run {
 		URLSendReceive butler = new URLSendReceive();
 		Date time = new Date();
 		Board currentState = new Board();
-		boolean 
 
 		JSONObject json = butler.urlReceive(butler.pollURL);
 			if (json.get("ready").toString() == "true") {
@@ -48,12 +48,12 @@ public class Run {
 					//do a move
 
 					ArrayList<Board> ourMoves = new ArrayList<Board>();
-					ourMoves.addAll(ourMoves.moveKings());
-					ourMoves.addAll(ourMoves.moveQueens());
-					ourMoves.addAll(ourMoves.moveBishops());
-					ourMoves.addAll(ourMoves.moveRooks());
-					ourMoves.addAll(ourMoves.moveKnights());
-					ourMoves.addAll(ourMoves.movePawns());
+					ourMoves.addAll(currentState.moveKings());
+					ourMoves.addAll(currentState.moveQueens());
+					ourMoves.addAll(currentState.moveBishops());
+					ourMoves.addAll(currentState.moveRooks());
+					ourMoves.addAll(currentState.moveKnights());
+					ourMoves.addAll(currentState.movePawns());
 
 					//ArrayList<Board> anorLondo = new ArrayList<Board>();
 					String bestMove = "";
