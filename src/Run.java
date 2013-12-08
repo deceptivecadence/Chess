@@ -28,6 +28,7 @@ public class Run {
 			//we are white.
 			weAreWhite = true;
 			String ourMove = findMove(currentState, weAreWhite);
+			System.out.println(ourMove);
 			butler.urlSend(ourMove);
 
 			System.out.println("~~~~~~ " + ourMove);
