@@ -111,27 +111,28 @@ public class Board {
 		String tX = "";
 
 		switch (fromX) {
-			case (0): fX = "a";
-			case (1): fX = "b";
-			case (2): fX = "c";
-			case (3): fX = "d";
-			case (4): fX = "e";
-			case (5): fX = "f";
-			case (6): fX = "g";
-			case (7): fX = "h";
+			case (0): fX = "a"; break;
+			case (1): fX = "b"; break;
+			case (2): fX = "c"; break;
+			case (3): fX = "d"; break;
+			case (4): fX = "e"; break;
+			case (5): fX = "f"; break;
+			case (6): fX = "g"; break;
+			case (7): fX = "h"; break;
 		}
 
 		switch (toX) {
-			case (0): tX = "a";
-			case (1): tX = "b";
-			case (2): tX = "c";
-			case (3): tX = "d";
-			case (4): tX = "e";
-			case (5): tX = "f";
-			case (6): tX = "g";
-			case (7): tX = "h";
+			case (0): tX = "a"; break;
+			case (1): tX = "b"; break;
+			case (2): tX = "c"; break;
+			case (3): tX = "d"; break;
+			case (4): tX = "e"; break;
+			case (5): tX = "f"; break;
+			case (6): tX = "g"; break;
+			case (7): tX = "h"; break;
 		}
 
+		//System.out.println(piece + fX + fY + tX + tY + promotion);
 		return piece + fX + fY + tX + tY + promotion;
 	}
 	
@@ -160,7 +161,7 @@ public class Board {
 										board2.board[i + operationY][j + operationX] = board2.board[i][j];
 										board2.board[i][j] = 0;
 										board2.lastMove = moveString("K", j, i, j + operationX, i + operationY, "");
-										System.out.println(board2.toString());
+										//System.out.println(board2.toString());
 
 										if (isBlack(this.board[i + operationY][j + operationX])) {
 											break;
@@ -168,7 +169,7 @@ public class Board {
 									}
 									//add board to "frontier" or wat do
 								}catch(IndexOutOfBoundsException e){
-									System.out.println("You dun fugged up");
+									//System.out.println("You dun fugged up");
 								}
 
 								if (i == 7 && j == 4 && this.board[7][7] == R &&
@@ -182,7 +183,7 @@ public class Board {
 									board2.board[7][7] = 0;
 									board2.lastMove = "Ke1g1";
 									boards.add(board2);
-									System.out.println(board2.toString());
+									//System.out.println(board2.toString());
 								}
 							}
 						}
@@ -235,12 +236,12 @@ public class Board {
 										board2.board[i][j] = 0;
 										board2.lastMove = moveString("Q", j, i, j + operationX, i + operationY, "");
 										boards.add(board2);
-										System.out.println(board2.toString());
+										/*System.out.println(board2.toString());
 										System.out.print(j);
 										System.out.print(" +"+operationX);
 										System.out.print(", "+i);
 										System.out.println(" +"+operationY);
-										System.out.println("");
+										System.out.println("");*/
 
 										//we can still do the move if there is a black piece here, but we can go no further.
 										if (isBlack(this.board[i + operationY][j + operationX])) {
@@ -249,7 +250,7 @@ public class Board {
 										//}
 									}
 								}catch(IndexOutOfBoundsException e){
-									System.out.println("You dun fugged up");
+									//System.out.println("You dun fugged up");
 								}
 							}
 						}
@@ -291,12 +292,12 @@ public class Board {
 											board2.board[i][j] = 0;
 											board2.lastMove = moveString("R", j, i, j + operationX, i + operationY, "");
 											boards.add(board2);
-											System.out.println(board2.toString());
+											/*System.out.println(board2.toString());
 											System.out.print(j);
 											System.out.print(" +"+operationX);
 											System.out.print(", "+i);
 											System.out.println(" +"+operationY);
-											System.out.println("");
+											System.out.println("");*/
 	
 											//we can still do the move if there is a black piece here, but we can go no further.
 											if (isBlack(this.board[i + operationY][j + operationX])) {
@@ -304,7 +305,7 @@ public class Board {
 											}
 										}
 									}catch(IndexOutOfBoundsException e){
-										System.out.println("You dun fugged up");
+										//System.out.println("You dun fugged up");
 									}
 								}
 							}
@@ -346,12 +347,12 @@ public class Board {
 											board2.board[i][j] = 0;
 											board2.lastMove = moveString("B", j, i, j + operationX, i + operationY, "");
 											boards.add(board2);
-											System.out.println(board2.toString());
+											/*System.out.println(board2.toString());
 											System.out.print(j);
 											System.out.print(" +"+operationX);
 											System.out.print(", "+i);
 											System.out.println(" +"+operationY);
-											System.out.println("");
+											System.out.println("");*/
 	
 											//we can still do the move if there is a black piece here, but we can go no further.
 											if (isBlack(this.board[i + operationY][j + operationX])) {
@@ -359,7 +360,7 @@ public class Board {
 											}
 										}
 									}catch(IndexOutOfBoundsException e){
-										System.out.println("You dun fugged up");
+										//System.out.println("You dun fugged up");
 									}
 								}
 							}
@@ -399,7 +400,7 @@ public class Board {
 								board2.board[i][j] = 0;
 								board2.lastMove = moveString("N", j, i, j + operationX, i + operationY, "");
 								boards.add(board2);
-								System.out.println(board2.toString());
+								//System.out.println(board2.toString());
 
 								if (isBlack(this.board[i + operationY][j + operationX])) {
 									continue;
@@ -407,7 +408,7 @@ public class Board {
 							}
 							//add board to "frontier" or wat do
 						}catch(IndexOutOfBoundsException e){
-							System.out.println("You dun fugged up");
+							//System.out.println("You dun fugged up");
 						}
 					}
 				}
@@ -460,12 +461,12 @@ public class Board {
 												}
 												
 												boards.add(board2);
-												System.out.println(board2.toString());
+												/*System.out.println(board2.toString());
 												System.out.print(j);
 												System.out.print(" +"+operationX);
 												System.out.print(", "+i);
 												System.out.println(" +"+operationY);
-												System.out.println("");
+												System.out.println("");*/
 											}
 										}
 										else if (operationX !=0 && isBlack(this.board[i + operationY][j + operationX])){
@@ -480,17 +481,17 @@ public class Board {
 												}
 												
 												boards.add(board2);
-												System.out.println(board2.toString());
+												/*System.out.println(board2.toString());
 												System.out.print(j);
 												System.out.print(" +"+operationX);
 												System.out.print(", "+i);
 												System.out.println(" +"+operationY);
-												System.out.println("");
+												System.out.println("");*/
 											}
 										}
 									}
 								}catch(IndexOutOfBoundsException e){
-									System.out.println("You dun fugged up");
+									//System.out.println("You dun fugged up");
 								}
 							}
 						}
@@ -567,7 +568,9 @@ public class Board {
 
 		from = move.substring(1, 3);
 		to = move.substring(3,5);
-		promotion = move.substring(5,6);
+		if (move.length() > 5) {
+			promotion = move.substring(5,6);
+		}
 		this.move(from, to, promotion);
 		return false;
 	}
@@ -578,8 +581,10 @@ public class Board {
 			for (int j = 0; j < 8; j += 1) {
 				if (this.board[7-i][7-j] >= 10)
 					newBoard.board[i][j] = (byte) (this.board[7-i][7-j] - 10);
-				else
+				else if (this.board[7-i][7-j] != 0)
 					newBoard.board[i][j] = (byte) (this.board[7-i][7-j] + 10);
+				else
+					newBoard.board[i][j] = (byte) 0;
 			}
 		}
 		

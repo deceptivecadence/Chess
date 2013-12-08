@@ -7,7 +7,7 @@ import java.net.URLConnection;
 import org.json.JSONObject;
 
 public class URLSendReceive {
-	String gameID = "490";
+	String gameID = "497";
 	String teamNumber = "1";
 	String teamSecret = "32c68cae";
 	//String teamNumber  ="2";

@@ -26,7 +26,8 @@ public class Run {
 				//we are white.
 				String ourMove = findMove(currentState);
 				butler.urlSend(ourMove);
-				
+
+				System.out.println("~~~~~~ " + ourMove);
 				currentState.moveFromInput(ourMove);
 				currentState = currentState.flipBoard();
 			}
@@ -53,9 +54,11 @@ public class Run {
 
 					ourMove = findMove(currentState);
 					butler.urlSend(ourMove);
+					System.out.println(ourMove);
 					
 					currentState.moveFromInput(ourMove);
 					currentState = currentState.flipBoard();
+					System.out.println(currentState);
 				}
 				
 				time = new Date();
@@ -78,10 +81,13 @@ public class Run {
 
 		//ArrayList<Board> anorLondo = new ArrayList<Board>();
 		String bestMove = "";
+		//Board besty = new Board();
 		int maxValue = -99999;
 		for (Board ourState : ourMoves) {
 			ArrayList<Board> theirMoves = new ArrayList<Board>();
+			String temp = ourState.lastMove;
 			ourState = ourState.flipBoard();
+			ourState.lastMove = temp;
 			theirMoves.addAll(ourState.moveKings());
 			theirMoves.addAll(ourState.moveQueens());
 			theirMoves.addAll(ourState.moveBishops());
@@ -99,9 +105,11 @@ public class Run {
 			if (minValue > maxValue) {
 				maxValue = minValue;
 				bestMove = ourState.lastMove;
+				//besty = ourState.flipBoard();
 			}
 		}
 
+		//System.out.println(besty);
 		return bestMove;
 		
 	}
