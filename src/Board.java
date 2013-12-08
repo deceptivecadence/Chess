@@ -676,6 +676,8 @@ public class Board {
 
 		int val = 1000 * (wkings - bkings) + 100 * (wqueens - bqueens) + 20 * (wrooks - brooks) +
 			12 * (wbishops - bbishops) + 12 * (wknights - bknights) + 4 * (wpawns - bpawns);
+
+		val += Math.random() * 10 - 5;
 		
 		if (white)
 			return val;
