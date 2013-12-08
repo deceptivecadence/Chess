@@ -348,7 +348,7 @@ public class Board {
 				if(this.board[i][j] == piece){
 					byte operationX;
 					byte operationY;
-					for(byte x=-boolean white1; x<2; x++){
+					for(byte x=-1; x<2; x++){
 											
 						for(byte y=-1; y<2; y++){
 							
@@ -633,7 +633,7 @@ public class Board {
 		return !(piece < 10 && piece != 0);
 	}
 
-	public boolean isTheirs(byte piece, boolean white) {.
+	public boolean isTheirs(byte piece, boolean white) {
 		if (white)
 			return (piece > 10);
 		return !(piece > 10);
