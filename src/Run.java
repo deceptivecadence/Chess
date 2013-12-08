@@ -133,7 +133,7 @@ public class Run {
 						//System.out.println(piece + fX + fY + tX + tY + promotion);
 						ourMove = piece + fX + fY + tX + tY + promotion;
 					}
-					
+					*/
 					if(butler.urlSend(ourMove).getBoolean("result")){
 						System.out.println("YOU ZUCK BALLS");
 					}
@@ -143,7 +143,7 @@ public class Run {
 						currentState.moveFromInput(ourMove);
 						currentState = currentState.flipBoard();
 						System.out.println(currentState);
-					}*/
+					}
 				}
 				
 				time = new Date();
