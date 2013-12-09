@@ -89,6 +89,32 @@ public class Run {
 		}
 	}
 
+	/*public static String miniMaxFind2(Board currentState, boolean white, boolean maxing, int depth) {
+		if (depth > 3) {
+			return currentState.value(white);
+		}
+
+		if (maxing) {
+			int best = -99999;
+			ArrayList<Board> branches = new ArrayList<Board>();
+			branches.addAll(currentState.movePawns(white ^ maxing));
+			branches.addAll(currentState.moveKings(white ^ maxing));
+			branches.addAll(currentState.moveQueens(white ^ maxing));
+			branches.addAll(currentState.moveBishops(white ^ maxing));
+			branches.addAll(currentState.moveRooks(white ^ maxing));
+			branches.addAll(currentState.moveKnights(white ^ maxing));
+			for (Board move : ourMoves) {
+				int val = miniMaxFind(move, white, false, depth + 1);
+				best = Math.max(best, val);
+			}
+			return best;
+		}
+		else {
+
+		}
+		return 0;
+	}*/
+
 	public static String miniMaxFind(Board currentState, boolean white) {
 		ArrayList<Board> ourMoves = new ArrayList<Board>();
 		//ArrayList<ArrayList<Board>> tree = new ArrayList<ArrayList<Board>>();
@@ -116,8 +142,10 @@ public class Run {
 	}
 
 	public static int maxValue(Board state, boolean white, int depth) {
+		System.out.println("Depth: " + depth);
+		System.out.println("is white: " + white);
 		if (depth > 3) {
-			return state.value(!white);
+			return state.value(white);
 		}
 
 		int maximum = -99999;
@@ -129,27 +157,29 @@ public class Run {
 		branches.addAll(state.moveRooks(white));
 		branches.addAll(state.moveKnights(white));
 		for (Board move : branches) {
-			maximum = Math.max(maximum, minValue(move, !white, depth + 1));
+			maximum = Math.max(maximum, minValue(move, white, depth + 1));
 		}
 
 		return maximum;
 	}
 
 	public static int minValue(Board state, boolean white, int depth) {
+		System.out.println("Depth: " + depth);
+		System.out.println("is white: " + white);
 		if (depth > 3) {
-			return state.value(!white);
+			return state.value(white);
 		}
 
 		int minimum = 99999;
 		ArrayList<Board> branches = new ArrayList<Board>();
-		branches.addAll(state.movePawns(white));
-		branches.addAll(state.moveKings(white));
-		branches.addAll(state.moveQueens(white));
-		branches.addAll(state.moveBishops(white));
-		branches.addAll(state.moveRooks(white));
-		branches.addAll(state.moveKnights(white));
+		branches.addAll(state.movePawns(!white));
+		branches.addAll(state.moveKings(!white));
+		branches.addAll(state.moveQueens(!white));
+		branches.addAll(state.moveBishops(!white));
+		branches.addAll(state.moveRooks(!white));
+		branches.addAll(state.moveKnights(!white));
 		for (Board move : branches) {
-			minimum = Math.min(minimum, maxValue(move, !white, depth + 1));
+			minimum = Math.min(minimum, maxValue(move, white, depth + 1));
 		}
 
 		return minimum;
