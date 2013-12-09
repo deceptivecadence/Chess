@@ -132,6 +132,9 @@ public class Run {
 		Board besty = new Board();
 		int maximum = -99999;
 		for (Board move : ourMoves) {
+			if (move.value(white) > 5000)
+				return move.lastMove;
+			
 			int min = minValue(move, white, 0);
 			if (min > maximum) {
 				bestMove = move.lastMove;
@@ -147,7 +150,7 @@ public class Run {
 	}
 
 	public static int maxValue(Board state, boolean white, int depth) {
-		if (depth > 2) {
+		if (depth > 3) {
 			return state.value(white);
 		}
 
@@ -167,7 +170,7 @@ public class Run {
 	}
 
 	public static int minValue(Board state, boolean white, int depth) {
-		if (depth > 2) {
+		if (depth > 3) {
 			return state.value(white);
 		}
 
