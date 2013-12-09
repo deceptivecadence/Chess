@@ -125,6 +125,7 @@ public class Run {
 				}
 			}
 
+			minValue = 99999;
 			//check scores from bottom of tree
 			for (Board state : tree.get(4)) {
 				if (state.value(white) < minValue) {
