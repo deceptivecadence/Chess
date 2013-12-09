@@ -58,7 +58,7 @@ public class Board {
 				
 			}
 		}
-		//board[3][3] = N;
+		board[2][3] = K;
 	}
 	
 	public void move(String from, String to, String promotion){
@@ -167,10 +167,12 @@ public class Board {
 										break;
 									}
 									else {
+										System.out.println(i+", "+j);
 										Board board2 = new Board();
 										board2.board[i + operationY][j + operationX] = board2.board[i][j];
 										board2.board[i][j] = 0;
 										board2.lastMove = moveString("K", j, i, j + operationX, i + operationY, "");
+										boards.add(board2);
 										//System.out.println(board2.toString());
 
 										if (isTheirs(this.board[i + operationY][j + operationX], white)) {
