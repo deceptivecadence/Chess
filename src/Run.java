@@ -110,18 +110,17 @@ public class Run {
 			tree.get(0).add(ourState);
 			for (int i = 1; i < 5; i += 1) {
 				tree.add(new ArrayList<Board>());
+				boolean ww = white;
+				if (i % 2 == 1)
+					ww = !white;
+				
 				for (Board state : tree.get(i-1)) {
-					boolean ww = white;
-					if (i % 2 == 1)
-						ww = !white;
-
 					tree.get(i).addAll(state.movePawns(ww));
 					tree.get(i).addAll(state.moveKings(ww));
 					tree.get(i).addAll(state.moveQueens(ww));
 					tree.get(i).addAll(state.moveBishops(ww));
 					tree.get(i).addAll(state.moveRooks(ww));
 					tree.get(i).addAll(state.moveKnights(ww));
-
 				}
 			}
 
@@ -144,6 +143,7 @@ public class Run {
 			}
 		}
 
+		System.out.println("maxValue was " + maxValue);
 		return bestMove;
 
 		/*
