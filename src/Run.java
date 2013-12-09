@@ -11,7 +11,7 @@ import org.json.JSONObject;
 public class Run {
 
 	public static void main(String[] args) {
-		int pingRate = 1000;
+		int pingRate = 200;
 		Board b = new Board();
 		System.out.println(b.toString());
 		//b.move("b1","c3");
