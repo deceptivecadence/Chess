@@ -19,7 +19,7 @@ public class Board {
 	//JSONArray pieceMapping = new JSONArray();
 
 	public String lastMove = "";
-			
+	public byte mobility = 0;
 	public Board(){
 		//Set up top row
 		for(byte i=0; i<2; i++){
@@ -171,6 +171,7 @@ public class Board {
 										Board board2 = new Board();
 										board2.board[i + operationY][j + operationX] = board2.board[i][j];
 										board2.board[i][j] = 0;
+										this.mobility += 1;
 										board2.lastMove = moveString("K", j, i, j + operationX, i + operationY, "");
 										//System.out.println(board2.toString());
 
