@@ -161,7 +161,7 @@ public class Run {
 	}
 
 	public static int maxValue(Board state, boolean white, int depth, int alpha, int beta) {
-		if (depth > 4) {
+		if (depth > 3) {
 			return state.value(white);
 		}
 
@@ -175,16 +175,16 @@ public class Run {
 		branches.addAll(state.movePawns(white));
 		for (Board move : branches) {
 			maximum = Math.max(maximum, minValue(move, white, depth + 1, alpha, beta));
-			if (maximum >= beta)
+			/*if (maximum >= beta)
 				return maximum;
-			alpha = Math.max(alpha, maximum);
+			alpha = Math.max(alpha, maximum);*/
 		}
 
 		return maximum;
 	}
 
 	public static int minValue(Board state, boolean white, int depth, int alpha, int beta) {
-		if (depth > 4) {
+		if (depth > 3) {
 			return state.value(white);
 		}
 
@@ -198,9 +198,9 @@ public class Run {
 		branches.addAll(state.movePawns(!white));
 		for (Board move : branches) {
 			minimum = Math.min(minimum, maxValue(move, white, depth + 1, alpha, beta));
-			if (minimum <= alpha)
+			/*if (minimum <= alpha)
 				return minimum;
-			beta = Math.min(beta, minimum);
+			beta = Math.min(beta, minimum);*/
 		}
 
 		return minimum;
