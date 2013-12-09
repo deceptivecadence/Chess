@@ -7,28 +7,13 @@ import java.net.URLConnection;
 import org.json.JSONObject;
 
 public class URLSendReceive {
-//<<<<<<< HEAD
-	String gameID = "504";
-//<<<<<<< HEAD
+
+	String gameID = "585";
 	String teamNumber = "1";
 	String teamSecret = "32c68cae";
 	//String teamNumber  ="2";
 	//String teamSecret = "1a77594c";
-/*=======
-	//String teamNumber = "1";
-	//String teamSecret = "32c68cae";
-	String teamNumber  ="2";
-	String teamSecret = "1a77594c";
->>>>>>> ab10b74f0dc42204860df1535c90410a4a737865
-/*=======
 
-	String gameID = "502";
-	//String teamNumber = "1";
-	//String teamSecret = "32c68cae";
-	String teamNumber  ="2";
-	String teamSecret = "1a77594c";
-
->>>>>>> 8126d251889c3b347f659ef09d61820503103b5d*/
 	
 	String pollURL = String.format("http://www.bencarle.com/chess/poll/%s/%s/%s/",this.gameID,this.teamNumber,this.teamSecret);	
 	public JSONObject urlReceive(String inUrl){
