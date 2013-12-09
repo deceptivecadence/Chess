@@ -58,7 +58,7 @@ public class Board {
 				
 			}
 		}
-		board[2][3] = K;
+		//board[2][3] = K;
 	}
 	
 	public void move(String from, String to, String promotion){
