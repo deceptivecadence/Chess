@@ -116,7 +116,7 @@ public class Run {
 	}
 
 	public static int maxValue(Board state, boolean white, int depth) {
-		if (depth > 4) {
+		if (depth > 3) {
 			return state.value(white);
 		}
 
@@ -136,7 +136,7 @@ public class Run {
 	}
 
 	public static int minValue(Board state, boolean white, int depth) {
-		if (depth > 4) {
+		if (depth > 3) {
 			return state.value(white);
 		}
 
