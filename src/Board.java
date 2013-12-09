@@ -168,7 +168,7 @@ public class Board {
 									}
 									else {
 										//System.out.println(i+", "+j);
-										Board board2 = new Board();
+										Board board2 = this.deepCopy();
 										board2.board[i + operationY][j + operationX] = board2.board[i][j];
 										board2.board[i][j] = 0;
 										board2.lastMove = moveString("K", j, i, j + operationX, i + operationY, "");
@@ -253,7 +253,7 @@ public class Board {
 										
 										}
 										if(!conflict){*/
-										Board board2 = new Board();
+										Board board2 = this.deepCopy();
 										board2.board[i + operationY][j + operationX] = board2.board[i][j];
 										board2.board[i][j] = 0;
 										board2.lastMove = moveString("Q", j, i, j + operationX, i + operationY, "");
@@ -313,7 +313,7 @@ public class Board {
 										}
 										else{
 
-											Board board2 = new Board();
+											Board board2 = this.deepCopy();
 											board2.board[i + operationY][j + operationX] = board2.board[i][j];
 											board2.board[i][j] = 0;
 											board2.lastMove = moveString("R", j, i, j + operationX, i + operationY, "");
@@ -372,7 +372,7 @@ public class Board {
 										}
 										else{
 
-											Board board2 = new Board();
+											Board board2 = this.deepCopy();
 											board2.board[i + operationY][j + operationX] = board2.board[i][j];
 											board2.board[i][j] = 0;
 											board2.lastMove = moveString("B", j, i, j + operationX, i + operationY, "");
@@ -429,7 +429,7 @@ public class Board {
 								continue;
 							}
 							else {
-								Board board2 = new Board();
+								Board board2 = this.deepCopy();
 								board2.board[i + operationY][j + operationX] = board2.board[i][j];
 								board2.board[i][j] = 0;
 								board2.lastMove = moveString("N", j, i, j + operationX, i + operationY, "");
@@ -488,7 +488,7 @@ public class Board {
 									break;
 								}
 								else{
-									Board board2 = new Board();
+									Board board2 = this.deepCopy();
 									if(operationX==0 && !isTheirs(this.board[i + operationY][j + operationX], white)){
 										for (int p=0;p<2;p++){
 											board2 = new Board();
@@ -527,7 +527,6 @@ public class Board {
 										}
 									}
 									else if (operationX !=0 && isTheirs(this.board[i + operationY][j + operationX], white)){
-										board2 = new Board();
 										if(isTheirs(this.board[i + operationY][j + operationX], white)){
 											board2.board[i + operationY][j + operationX] = board2.board[i][j];
 											board2.board[i][j] = 0;
@@ -707,6 +706,16 @@ public class Board {
 		if (white)
 			return val;
 		return -val;
+	}
+	
+	public Board deepCopy(){
+		Board newBoard = new Board();
+		for (int i=0; i<8; i++){
+			for (int j=0; j<8; j++){
+				newBoard.board[i][j] = this.board[i][j];
+			}
+		}
+		return newBoard;
 	}
 	
 	@Override
