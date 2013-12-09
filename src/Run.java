@@ -28,7 +28,7 @@ public class Run {
 		System.out.println(json.toString());
 		if (json.get("ready").toString() == "true") {
 			//we are white.
-			weAreWhite = true;
+			weAreWhite = true; 
 			String ourMove = miniMaxFind(currentState, weAreWhite);
 			System.out.println(ourMove);
 			butler.urlSend(ourMove);
@@ -132,7 +132,7 @@ public class Run {
 		//Board bestMove = new Board();
 		int maximum = -99999;
 		for (Board move : ourMoves) {
-			int min = minValue(move, !white, 0);
+			int min = minValue(move, white, 0);
 			if (min > maximum) {
 				bestMove = move.lastMove;
 				maximum = min;
