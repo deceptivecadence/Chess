@@ -97,12 +97,12 @@ public class Run {
 		int minValue = 99999;
 
 		//generate all possible states from current state, till depth 4
+		ourMoves.addAll(currentState.movePawns(white));
 		ourMoves.addAll(currentState.moveKings(white));
 		ourMoves.addAll(currentState.moveQueens(white));
 		ourMoves.addAll(currentState.moveBishops(white));
 		ourMoves.addAll(currentState.moveRooks(white));
 		ourMoves.addAll(currentState.moveKnights(white));
-		ourMoves.addAll(currentState.movePawns(white));
 
 		for (Board ourState : ourMoves) {
 			ArrayList<ArrayList<Board>> tree = new ArrayList<ArrayList<Board>>();
@@ -115,12 +115,13 @@ public class Run {
 					if (i % 2 == 1)
 						ww = !white;
 
+					tree.get(i).addAll(state.movePawns(ww));
 					tree.get(i).addAll(state.moveKings(ww));
 					tree.get(i).addAll(state.moveQueens(ww));
 					tree.get(i).addAll(state.moveBishops(ww));
 					tree.get(i).addAll(state.moveRooks(ww));
 					tree.get(i).addAll(state.moveKnights(ww));
-					tree.get(i).addAll(state.movePawns(ww));
+
 				}
 			}
 
