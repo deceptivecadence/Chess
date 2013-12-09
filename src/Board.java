@@ -68,6 +68,9 @@ public class Board {
 		
 		byte byteFromRow   = (byte) (8 - Integer.parseInt(from.substring(1, 2)));
 		byte byteToRow     = (byte) (8 - Integer.parseInt(to.substring(1, 2)));
+
+		boolean white = (this.board[byteFromRow][byteFromCol] < 10);
+		
 		switch(from.substring(0, 1)){
 			case "a": byteFromCol = 0; break;
 			case "b": byteFromCol = 1; break;
@@ -95,10 +98,14 @@ public class Board {
 		this.board[byteToRow][byteToCol] = piece;
 		if(!promotion.equals("")){
 			switch(promotion){
-				case "Q": this.board[byteToRow][byteToCol] = bQ; 
-				case "R": this.board[byteToRow][byteToCol] = bQ;
-				case "B": this.board[byteToRow][byteToCol] = bB;
-				case "N": this.board[byteToRow][byteToCol] = bN;
+				case "Q": this.board[byteToRow][byteToCol] = bQ; break;
+				case "R": this.board[byteToRow][byteToCol] = bQ; break;
+				case "B": this.board[byteToRow][byteToCol] = bB; break;
+				case "N": this.board[byteToRow][byteToCol] = bN; break;
+			}
+
+			if (white) {
+				this.board[byteToRow][byteToCol] -= 10;
 			}
 		}
 	}
