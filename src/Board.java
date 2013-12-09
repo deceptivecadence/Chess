@@ -94,7 +94,7 @@ public class Board {
 		byte piece = this.board[byteFromRow][byteFromCol];
 		byte castlepiece;
 
-		if ((piece == K || piece == bK) && (Math.abs(byteFromCol - byteToCol) > 1) {
+		if ((piece == K || piece == bK) && (Math.abs(byteFromCol - byteToCol) > 1)) {
 			//a castle was performed
 			if (byteToCol == 2) {
 				//queenside
@@ -755,5 +755,4 @@ public class Board {
 		}
 		return output;
 	}
-}castlepiece = this.board[0][0];
-					this.board[0][3] = castlepiece;
+}
