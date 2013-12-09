@@ -143,7 +143,7 @@ public class Run {
 			}
 		}
 
-		System.out.println("~~~~~~~~~~~~~~~~~\n" + besty  + "\nValue: " + besty.value(white));
+		System.out.println("~~~~~~~~~~~~~~~~~\n" + besty  + "\nValue: " + besty.value(white)); 
 		
 
 		return bestMove;
