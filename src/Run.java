@@ -142,8 +142,6 @@ public class Run {
 	}
 
 	public static int maxValue(Board state, boolean white, int depth) {
-		System.out.println("Depth: " + depth);
-		System.out.println("is white: " + white);
 		if (depth > 3) {
 			return state.value(white);
 		}
@@ -164,8 +162,6 @@ public class Run {
 	}
 
 	public static int minValue(Board state, boolean white, int depth) {
-		System.out.println("Depth: " + depth);
-		System.out.println("is white: " + white);
 		if (depth > 3) {
 			return state.value(white);
 		}
