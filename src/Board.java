@@ -105,7 +105,7 @@ public class Board {
 			else {
 				//kingside
 				castlepiece = this.board[byteToRow][7];
-				this.board[byteToRow][0] = 0;
+				this.board[byteToRow][7] = 0;
 				this.board[byteToRow][5] = castlepiece;
 			}
 		}
