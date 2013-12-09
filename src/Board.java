@@ -174,7 +174,7 @@ public class Board {
 					
 					for(byte x=-1; x<2; x++){
 						for(byte y=-1; y<2; y++){
-							k = 1;
+							byte k = (byte) 1;
 							//for(byte k=1; k<=moveNumber; k++){
 							operationX = (byte) (x*k);
 							operationY = (byte) (y*k);
