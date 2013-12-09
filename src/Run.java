@@ -122,12 +122,12 @@ public class Run {
 		String bestMove = "nigga";
 
 		//generate all possible states from current state, till depth 4
-		ourMoves.addAll(currentState.movePawns(white));
 		ourMoves.addAll(currentState.moveKnights(white));
 		ourMoves.addAll(currentState.moveQueens(white));
 		ourMoves.addAll(currentState.moveBishops(white));
 		ourMoves.addAll(currentState.moveRooks(white));
 		ourMoves.addAll(currentState.moveKings(white));
+		ourMoves.addAll(currentState.movePawns(white));
 
 		/*Board besty = new Board();
 		int maximum = -99999;
@@ -167,12 +167,12 @@ public class Run {
 
 		int maximum = -99999;
 		ArrayList<Board> branches = new ArrayList<Board>();
-		branches.addAll(state.movePawns(white));
 		branches.addAll(state.moveKnights(white));
 		branches.addAll(state.moveQueens(white));
 		branches.addAll(state.moveBishops(white));
 		branches.addAll(state.moveRooks(white));
 		branches.addAll(state.moveKings(white));
+		branches.addAll(state.movePawns(white));
 		for (Board move : branches) {
 			maximum = Math.max(maximum, minValue(move, white, depth + 1, alpha, beta));
 			if (maximum >= beta)
@@ -190,12 +190,12 @@ public class Run {
 
 		int minimum = 99999;
 		ArrayList<Board> branches = new ArrayList<Board>();
-		branches.addAll(state.movePawns(!white));
 		branches.addAll(state.moveKnights(!white));
 		branches.addAll(state.moveQueens(!white));
 		branches.addAll(state.moveBishops(!white));
 		branches.addAll(state.moveRooks(!white));
 		branches.addAll(state.moveKings(!white));
+		branches.addAll(state.movePawns(!white));
 		for (Board move : branches) {
 			minimum = Math.min(minimum, maxValue(move, white, depth + 1, alpha, beta));
 			if (minimum <= alpha)
