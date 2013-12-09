@@ -1,6 +1,7 @@
 //Andrew made most of this file. copyright 2013 andrew. ^(tm) == false;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 import org.json.JSONException;
@@ -16,7 +17,7 @@ public class Run {
 		//b.move("b1","c3");
 		//System.out.println(b.toString());
 		//System.out.println(b.flipBoard().toString());
-		//b.moveKings();
+		//b.moveKings(true);
 		//b.moveQueens();\
 		//b.moveKnights();
 		URLSendReceive butler = new URLSendReceive();
