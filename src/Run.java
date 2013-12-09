@@ -129,15 +129,19 @@ public class Run {
 		ourMoves.addAll(currentState.moveRooks(white));
 		ourMoves.addAll(currentState.moveKnights(white));
 
-		//Board bestMove = new Board();
+		Board besty = new Board();
 		int maximum = -99999;
 		for (Board move : ourMoves) {
 			int min = minValue(move, white, 0);
 			if (min > maximum) {
 				bestMove = move.lastMove;
+				besty = move;
 				maximum = min;
 			}
 		}
+
+		System.out.println("~~~~~~~~~~~~~~~~~\n" + besty  + "\nValue: " + besty.value());
+		
 
 		return bestMove;
 	}
