@@ -167,7 +167,7 @@ public class Board {
 										break;
 									}
 									else {
-										System.out.println(i+", "+j);
+										//System.out.println(i+", "+j);
 										Board board2 = new Board();
 										board2.board[i + operationY][j + operationX] = board2.board[i][j];
 										board2.board[i][j] = 0;
