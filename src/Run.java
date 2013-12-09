@@ -175,9 +175,9 @@ public class Run {
 		branches.addAll(state.movePawns(white));
 		for (Board move : branches) {
 			maximum = Math.max(maximum, minValue(move, white, depth + 1, alpha, beta));
-			if (maximum >= beta)
+			/*if (maximum >= beta)
 				return maximum;
-			alpha = Math.max(alpha, maximum);
+			alpha = Math.max(alpha, maximum);*/
 		}
 
 		return maximum;
@@ -198,9 +198,9 @@ public class Run {
 		branches.addAll(state.movePawns(!white));
 		for (Board move : branches) {
 			minimum = Math.min(minimum, maxValue(move, white, depth + 1, alpha, beta));
-			if (minimum <= alpha)
+			/*if (minimum <= alpha)
 				return minimum;
-			beta = Math.min(beta, minimum);
+			beta = Math.min(beta, minimum);*/
 		}
 
 		return minimum;
