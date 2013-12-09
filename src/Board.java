@@ -507,7 +507,38 @@ public class Board {
 								else{
 									Board board2 = this.deepCopy();
 									if(operationX==0 && this.board[i + operationY][j + operationX] == 0){
-										for (int p=0;p<2;p++){
+
+										board2.board[i + operationY][j + operationX] = board2.board[i][j];
+										board2.board[i][j] = 0;
+										board2.lastMove = moveString("P", j, i, j + operationX, i + operationY, "");
+
+										if((i + operationY) == promoSpot){
+											board2.board[i + operationY][j + operationX] = Q;
+											if (!white) {
+												board2.board[i + operationY][j + operationX] = bQ;
+											}
+											board2.lastMove = moveString("P", j, i, j + operationX, i + operationY, "Q");
+										}
+										
+										boards.add(board2);
+
+										int startSpot = 6;
+										if (!white) {
+											startSpot = 1;
+										}
+										
+										if (i == startSpot) {
+											operationY *= 2;
+										}
+										
+										if(this.board[i + operationY][j + operationX] == 0){
+											board2 = this.deepCopy();
+											board2.board[i + operationY][j + operationX] = board2.board[i][j];
+											board2.board[i][j] = 0;
+											board2.lastMove = moveString("P", j, i, j + operationX, i + operationY, "");
+											boards.add(board2);
+										}
+										/*for (int p=0;p<2;p++){
 											
 											int startSpot = 6;
 											if (!white) {
@@ -519,28 +550,16 @@ public class Board {
 												else {
 													continue;
 												}
-											}
+											}*/
 											
-											board2.board[i + operationY][j + operationX] = board2.board[i][j];
-											board2.board[i][j] = 0;
-											board2.lastMove = moveString("P", j, i, j + operationX, i + operationY, "");
-
-											if((i + operationY) == promoSpot){
-												board2.board[i + operationY][j + operationX] = Q;
-												if (!white) {
-													board2.board[i + operationY][j + operationX] = bQ;
-												}
-												board2.lastMove = moveString("P", j, i, j + operationX, i + operationY, "Q");
-											}
 											
-											boards.add(board2);
 											/*System.out.println(board2.toString());
 											System.out.print(j);
 											System.out.print(" +"+operationX);
 											System.out.print(", "+i);
 											System.out.println(" +"+operationY);
 											System.out.println("");*/
-										}
+										//}
 									}
 									else if (operationX !=0 && isTheirs(this.board[i + operationY][j + operationX], white)){
 										if(isTheirs(this.board[i + operationY][j + operationX], white)){
