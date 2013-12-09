@@ -132,6 +132,9 @@ public class Run {
 		Board besty = new Board();
 		int maximum = -99999;
 		for (Board move : ourMoves) {
+			if (move.value(white) > 5000)
+				return move.lastMove;
+			
 			int min = minValue(move, white, 0);
 			if (min > maximum) {
 				bestMove = move.lastMove;
