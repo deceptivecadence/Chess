@@ -61,7 +61,7 @@ public class Board {
 		//board[2][3] = K;
 	}
 	
-	public void move(String p, String from, String to, String promotion){
+	public void move(String from, String to, String promotion){
 		byte byteFromCol  = -1;
 		byte byteToCol    = -1;
 		
@@ -506,7 +506,7 @@ public class Board {
 								}
 								else{
 									Board board2 = this.deepCopy();
-									if(operationX==0 && !isTheirs(this.board[i + operationY][j + operationX], white)){
+									if(operationX==0 && this.board[i + operationY][j + operationX] == 0){
 										for (int p=0;p<2;p++){
 											
 											int startSpot = 6;
@@ -636,18 +636,18 @@ public class Board {
 	
 	//move will be PieceFrom(Col1Row1)To(Col2Row2)[promotion]
 	public Boolean moveFromInput(String move){
-		String piece = "";
+		//String piece = "";
 		String from = "";
 		String to = "";
 		String promotion = "";
 
-		piece = move.substring(0, 1);
+		//piece = move.substring(0, 1);
 		from = move.substring(1, 3);
 		to = move.substring(3,5);
 		if (move.length() > 5) {
 			promotion = move.substring(5,6);
 		}
-		this.move(piece, from, to, promotion);
+		this.move(from, to, promotion);
 		return false;
 	}
 	
