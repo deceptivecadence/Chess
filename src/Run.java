@@ -140,14 +140,14 @@ public class Run {
 			}
 		}
 
-		System.out.println("~~~~~~~~~~~~~~~~~\n" + besty  + "\nValue: " + besty.value());
+		System.out.println("~~~~~~~~~~~~~~~~~\n" + besty  + "\nValue: " + besty.value(white));
 		
 
 		return bestMove;
 	}
 
 	public static int maxValue(Board state, boolean white, int depth) {
-		if (depth > 0) {
+		if (depth > 2) {
 			return state.value(white);
 		}
 
@@ -167,7 +167,7 @@ public class Run {
 	}
 
 	public static int minValue(Board state, boolean white, int depth) {
-		if (depth > 0) {
+		if (depth > 2) {
 			return state.value(white);
 		}
 
