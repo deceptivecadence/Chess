@@ -491,7 +491,6 @@ public class Board {
 									Board board2 = this.deepCopy();
 									if(operationX==0 && !isTheirs(this.board[i + operationY][j + operationX], white)){
 										for (int p=0;p<2;p++){
-											board2 = new Board();
 											
 											int startSpot = 6;
 											if (!white) {
