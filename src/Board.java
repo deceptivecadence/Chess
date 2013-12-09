@@ -68,8 +68,6 @@ public class Board {
 		
 		byte byteFromRow   = (byte) (8 - Integer.parseInt(from.substring(1, 2)));
 		byte byteToRow     = (byte) (8 - Integer.parseInt(to.substring(1, 2)));
-
-		boolean white = (this.board[byteFromRow][byteFromCol] < 10);
 		
 		switch(from.substring(0, 1)){
 			case "a": byteFromCol = 0; break;
@@ -92,6 +90,8 @@ public class Board {
 			case "g": byteToCol = 6; break;
 			case "h": byteToCol = 7; break;
 		}
+
+		boolean white = (this.board[byteFromRow][byteFromCol] < 10);
 		
 		byte piece = this.board[byteFromRow][byteFromCol];
 		this.board[byteFromRow][byteFromCol] = 0;
