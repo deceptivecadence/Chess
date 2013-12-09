@@ -679,8 +679,8 @@ public class Board {
 		wkings = wqueens = wrooks = wbishops = wknights = wpawns = 0;
 		bkings = bqueens = brooks = bbishops = bknights = bpawns = 0;
 		
-		for (int i = 0; i < 7; i += 1) {
-			for (int j = 0; j < 7; j += 1) {
+		for (int i = 0; i < 8; i += 1) {
+			for (int j = 0; j < 8; j += 1) {
 				switch (this.board[i][j]) { 
 					case (K): wkings++; break;
 					case (Q): wqueens++; break;
