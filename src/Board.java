@@ -174,32 +174,33 @@ public class Board {
 					
 					for(byte x=-1; x<2; x++){
 						for(byte y=-1; y<2; y++){
-							for(byte k=1; k<=moveNumber; k++){
-								operationX = (byte) (x*k);
-								operationY = (byte) (y*k);
-								try{
-									if ((isOurs(this.board[i + operationY][j + operationX], white) || 
-										(i + operationY < 0) || (i + operationY > 7) ||
-										(j + operationX < 0) || (j + operationX > 7))){
-										break;
-									}
-									else {
-										//System.out.println(i+", "+j);
-										Board board2 = this.deepCopy();
-										board2.board[i + operationY][j + operationX] = board2.board[i][j];
-										board2.board[i][j] = 0;
-										board2.lastMove = moveString("K", j, i, j + operationX, i + operationY, "");
-										boards.add(board2);
-										//System.out.println(board2.toString());
-
-										if (isTheirs(this.board[i + operationY][j + operationX], white)) {
-											break;
-										}
-									}
-									//add board to "frontier" or wat do
-								}catch(IndexOutOfBoundsException e){
-									//System.out.println("You dun fugged up");
+							k = 1;
+							//for(byte k=1; k<=moveNumber; k++){
+							operationX = (byte) (x*k);
+							operationY = (byte) (y*k);
+							try{
+								if ((isOurs(this.board[i + operationY][j + operationX], white) || 
+									(i + operationY < 0) || (i + operationY > 7) ||
+									(j + operationX < 0) || (j + operationX > 7))){
+									break;
 								}
+								else {
+									//System.out.println(i+", "+j);
+									Board board2 = this.deepCopy();
+									board2.board[i + operationY][j + operationX] = board2.board[i][j];
+									board2.board[i][j] = 0;
+									board2.lastMove = moveString("K", j, i, j + operationX, i + operationY, "");
+									boards.add(board2);
+									//System.out.println(board2.toString());
+
+									/*if (isTheirs(this.board[i + operationY][j + operationX], white)) {
+										break;
+									}*/
+								}
+								//add board to "frontier" or wat do
+							}catch(IndexOutOfBoundsException e){
+								//System.out.println("You dun fugged up");
+							}
 
 								//PUT DIS MUTHAFUCKIN CASTLAN BAK IN.
 								//////////////////////////
@@ -220,7 +221,7 @@ public class Board {
 									boards.add(board2);
 									//System.out.println(board2.toString());
 								}*/
-							}
+							
 						}
 					}
 				} 
@@ -453,9 +454,9 @@ public class Board {
 								boards.add(board2);
 								//System.out.println(board2.toString());
 
-								if (isTheirs(this.board[i + operationY][j + operationX], white)) {
+								/*if (isTheirs(this.board[i + operationY][j + operationX], white)) {
 									continue;
-								}
+								}*/
 							}
 							//add board to "frontier" or wat do
 						}catch(IndexOutOfBoundsException e){
