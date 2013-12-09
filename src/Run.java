@@ -28,7 +28,7 @@ public class Run {
 		if (json.get("ready").toString() == "true") {
 			//we are white.
 			weAreWhite = true;
-			String ourMove = miniMaxFind(currentState, weAreWhite, 0);
+			String ourMove = miniMaxFind(currentState, weAreWhite);
 			System.out.println(ourMove);
 			butler.urlSend(ourMove);
 
@@ -59,7 +59,7 @@ public class Run {
 					//currentState = currentState.flipBoard();
 					//do a move
 
-					ourMove = miniMaxFind(currentState, weAreWhite, 0);
+					ourMove = miniMaxFind(currentState, weAreWhite);
 					
 					JSONObject response = butler.urlSend(ourMove);
 					System.out.println(ourMove);
@@ -105,9 +105,9 @@ public class Run {
 		//Board bestMove = new Board();
 		int maximum = -99999;
 		for (Board move : ourMoves) {
-			int min = minValue(board, !white, depth + 1));
+			int min = minValue(move, !white, 0);
 			if (min > maximum) {
-				bestMove = move.lastMove();
+				bestMove = move.lastMove;
 				maximum = min;
 			}
 		}
@@ -115,9 +115,9 @@ public class Run {
 		return bestMove;
 	}
 
-	public int maxValue(Board state, boolean white, int depth) {
+	public static int maxValue(Board state, boolean white, int depth) {
 		if (depth > 3) {
-			return state.value();
+			return state.value(white);
 		}
 
 		int maximum = -99999;
@@ -129,15 +129,15 @@ public class Run {
 		branches.addAll(state.moveRooks(white));
 		branches.addAll(state.moveKnights(white));
 		for (Board move : branches) {
-			maximum = Math.max(maximum, minValue(board, !white, depth + 1));
+			maximum = Math.max(maximum, minValue(move, !white, depth + 1));
 		}
 
 		return maximum;
 	}
 
-	public int minValue(Board state, boolean white, int depth) {
+	public static int minValue(Board state, boolean white, int depth) {
 		if (depth > 3) {
-			return state.value();
+			return state.value(white);
 		}
 
 		int minimum = 99999;
@@ -149,7 +149,7 @@ public class Run {
 		branches.addAll(state.moveRooks(white));
 		branches.addAll(state.moveKnights(white));
 		for (Board move : branches) {
-			minimum = Math.min(minimum, maxValue(board, !white, depth + 1));
+			minimum = Math.min(minimum, maxValue(move, !white, depth + 1));
 		}
 
 		return minimum;
