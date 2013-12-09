@@ -28,7 +28,7 @@ public class Run {
 		if (json.get("ready").toString() == "true") {
 			//we are white.
 			weAreWhite = true;
-			String ourMove = findMove(currentState, weAreWhite);
+			String ourMove = miniMaxFind(currentState, weAreWhite, 0);
 			System.out.println(ourMove);
 			butler.urlSend(ourMove);
 
@@ -59,7 +59,7 @@ public class Run {
 					//currentState = currentState.flipBoard();
 					//do a move
 
-					ourMove = findMove(currentState, weAreWhite);
+					ourMove = miniMaxFind(currentState, weAreWhite, 0);
 					
 					JSONObject response = butler.urlSend(ourMove);
 					System.out.println(ourMove);
@@ -87,6 +87,72 @@ public class Run {
 				}
 			}
 		}
+	}
+
+	public static String miniMaxFind(Board currentState, boolean white) {
+		ArrayList<Board> ourMoves = new ArrayList<Board>();
+		//ArrayList<ArrayList<Board>> tree = new ArrayList<ArrayList<Board>>();
+		String bestMove = "nigga";
+
+		//generate all possible states from current state, till depth 4
+		ourMoves.addAll(currentState.movePawns(white));
+		ourMoves.addAll(currentState.moveKings(white));
+		ourMoves.addAll(currentState.moveQueens(white));
+		ourMoves.addAll(currentState.moveBishops(white));
+		ourMoves.addAll(currentState.moveRooks(white));
+		ourMoves.addAll(currentState.moveKnights(white));
+
+		//Board bestMove = new Board();
+		int maximum = -99999;
+		for (Board move : ourMoves) {
+			int min = minValue(board, !white, depth + 1));
+			if (min > maximum) {
+				bestMove = move.lastMove();
+				maximum = min;
+			}
+		}
+
+		return bestMove;
+	}
+
+	public int maxValue(Board state, boolean white, int depth) {
+		if (depth > 3) {
+			return state.value();
+		}
+
+		int maximum = -99999;
+		ArrayList<Board> branches = new ArrayList<Board>();
+		branches.addAll(state.movePawns(white));
+		branches.addAll(state.moveKings(white));
+		branches.addAll(state.moveQueens(white));
+		branches.addAll(state.moveBishops(white));
+		branches.addAll(state.moveRooks(white));
+		branches.addAll(state.moveKnights(white));
+		for (Board move : branches) {
+			maximum = Math.max(maximum, minValue(board, !white, depth + 1));
+		}
+
+		return maximum;
+	}
+
+	public int minValue(Board state, boolean white, int depth) {
+		if (depth > 3) {
+			return state.value();
+		}
+
+		int minimum = 99999;
+		ArrayList<Board> branches = new ArrayList<Board>();
+		branches.addAll(state.movePawns(white));
+		branches.addAll(state.moveKings(white));
+		branches.addAll(state.moveQueens(white));
+		branches.addAll(state.moveBishops(white));
+		branches.addAll(state.moveRooks(white));
+		branches.addAll(state.moveKnights(white));
+		for (Board move : branches) {
+			minimum = Math.min(minimum, maxValue(board, !white, depth + 1));
+		}
+
+		return minimum;
 	}
 
 	public static String findMove(Board currentState, boolean white) {
