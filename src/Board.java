@@ -61,7 +61,7 @@ public class Board {
 		//board[2][3] = K;
 	}
 	
-	public void move(String from, String to, String promotion){
+	public void move(String p, String from, String to, String promotion){
 		byte byteFromCol  = -1;
 		byte byteToCol    = -1;
 		
@@ -91,8 +91,25 @@ public class Board {
 		}
 
 		boolean white = (this.board[byteFromRow][byteFromCol] < 10);
-		
 		byte piece = this.board[byteFromRow][byteFromCol];
+		byte castlepiece;
+
+		if ((piece == K || piece == bK) && (Math.abs(byteFromCol - byteToCol) > 1) {
+			//a castle was performed
+			if (byteToCol == 2) {
+				//queenside
+				castlepiece = this.board[byteToRow][0];
+				this.board[byteToRow][0] = 0;
+				this.board[byteToRow][3] = castlepiece;
+			}
+			else {
+				//kingside
+				castlepiece = this.board[byteToRow][7];
+				this.board[byteToRow][0] = 0;
+				this.board[byteToRow][5] = castlepiece;
+			}
+		}
+		
 		this.board[byteFromRow][byteFromCol] = 0;
 		this.board[byteToRow][byteToCol] = piece;
 		if(!promotion.equals("")){
@@ -619,16 +636,18 @@ public class Board {
 	
 	//move will be PieceFrom(Col1Row1)To(Col2Row2)[promotion]
 	public Boolean moveFromInput(String move){
+		String piece = "";
 		String from = "";
 		String to = "";
 		String promotion = "";
 
+		piece = move.substring(0, 1);
 		from = move.substring(1, 3);
 		to = move.substring(3,5);
 		if (move.length() > 5) {
 			promotion = move.substring(5,6);
 		}
-		this.move(from, to, promotion);
+		this.move(piece, from, to, promotion);
 		return false;
 	}
 	
@@ -736,4 +755,5 @@ public class Board {
 		}
 		return output;
 	}
-}
+}castlepiece = this.board[0][0];
+					this.board[0][3] = castlepiece;
