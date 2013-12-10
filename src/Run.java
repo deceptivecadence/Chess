@@ -129,27 +129,27 @@ public class Run {
 		ourMoves.addAll(currentState.moveRooks(white));
 		ourMoves.addAll(currentState.moveKnights(white));
 
-		Board besty = new Board();
+		//Board besty = new Board();
 		int maximum = -99999;
 		for (Board move : ourMoves) {
 			if (move.value(white) > 5000)
 				return move.lastMove;
 			
-			int min = minValue(move, white, 0);
+			int min = minValue(move, white, 0, -99999, 99999);
 			if (min > maximum) {
 				bestMove = move.lastMove;
-				besty = move;
+				//besty = move;
 				maximum = min;
 			}
 		}
 
-		System.out.println("~~~~~~~~~~~~~~~~~\n" + besty  + "\nValue: " + besty.value(white)); 
+		//System.out.println("~~~~~~~~~~~~~~~~~\n" + besty  + "\nValue: " + besty.value(white)); 
 		
 
 		return bestMove;
 	}
 
-	public static int maxValue(Board state, boolean white, int depth) {
+	public static int maxValue(Board state, boolean white, int depth, int alpha, int beta) {
 		if (depth > 3) {
 			return state.value(white);
 		}
@@ -163,13 +163,16 @@ public class Run {
 		branches.addAll(state.moveKnights(white));
 		branches.addAll(state.movePawns(white));
 		for (Board move : branches) {
-			maximum = Math.max(maximum, minValue(move, white, depth + 1));
+			maximum = Math.max(maximum, minValue(move, white, depth + 1, alpha, beta));
+			if (maximum >= beta)
+				return maximum;
+			alpha = Math.max(alpha, maximum);
 		}
 
 		return maximum;
 	}
 
-	public static int minValue(Board state, boolean white, int depth) {
+	public static int minValue(Board state, boolean white, int depth, int alpha, int beta) {
 		if (depth > 3) {
 			return state.value(white); 
 		}
@@ -184,6 +187,9 @@ public class Run {
 		branches.addAll(state.movePawns(!white));
 		for (Board move : branches) {
 			minimum = Math.min(minimum, maxValue(move, white, depth + 1));
+			if (minimum <= alpha)
+				return minimum;
+			beta = Math.min(beta, minimum);
 		}
 
 		return minimum;
