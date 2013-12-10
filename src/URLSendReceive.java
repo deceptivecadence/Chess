@@ -8,11 +8,11 @@ import org.json.JSONObject;
 
 public class URLSendReceive {
 
-	String gameID = "585";
-	String teamNumber = "1";
-	String teamSecret = "32c68cae";
-	//String teamNumber  ="2";
-	//String teamSecret = "1a77594c";
+	String gameID = "615";
+	//String teamNumber = "1";
+	//String teamSecret = "32c68cae";
+	String teamNumber  ="2";
+	String teamSecret = "1a77594c";
 
 	
 	String pollURL = String.format("http://www.bencarle.com/chess/poll/%s/%s/%s/",this.gameID,this.teamNumber,this.teamSecret);	
