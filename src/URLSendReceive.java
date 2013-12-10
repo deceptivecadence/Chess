@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 public class URLSendReceive {
 
-	String gameID = "585";
+	String gameID = "615";
 	String teamNumber = "1";
 	String teamSecret = "32c68cae";
 	//String teamNumber  ="2";
@@ -24,7 +24,7 @@ public class URLSendReceive {
 			JSONObject json = new JSONObject(toJSONString(in));
 			return json;
 		} catch (IOException e) {
-			return new JSONObject();
+			return new JSONObject(); 
 		}
 		
 	}
