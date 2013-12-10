@@ -186,7 +186,7 @@ public class Run {
 		branches.addAll(state.moveKnights(!white));
 		branches.addAll(state.movePawns(!white));
 		for (Board move : branches) {
-			minimum = Math.min(minimum, maxValue(move, white, depth + 1));
+			minimum = Math.min(minimum, maxValue(move, white, depth + 1, alpha, beta));
 			if (minimum <= alpha)
 				return minimum;
 			beta = Math.min(beta, minimum);
