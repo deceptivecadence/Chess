@@ -171,7 +171,7 @@ public class Run {
 
 	public static int minValue(Board state, boolean white, int depth) {
 		if (depth > 3) {
-			return state.value(white);
+			return state.value(white); 
 		}
 
 		int minimum = 99999;

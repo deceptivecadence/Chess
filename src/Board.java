@@ -718,7 +718,7 @@ public class Board {
 		for (int i = 0; i < 8; i += 1) {
 			for (int j = 0; j < 8; j += 1) {
 				switch (this.board[i][j]) { 
-					case (K): wkings++; break;
+					case (K): wkings++; break; 
 					case (Q): wqueens++; break;
 					case (R): wrooks++; break;
 					case (B): wbishops++; break;
