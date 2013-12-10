@@ -176,10 +176,7 @@ public class Run {
 		branches.addAll(state.moveKings(white));
 		
 		for (Board move : branches) {
-			val = minValue(move, white, depth + 1, alpha, beta);
-			if (val > maximum) {
-				maximum = val;
-			}
+			maximum = Math.max(maximum, minValue(move, white, depth + 1, alpha, beta));
 			if (maximum >= beta)
 				return maximum;
 			alpha = Math.max(alpha, maximum);
@@ -194,7 +191,6 @@ public class Run {
 		}
 
 		int minimum = 99999;
-		int val = 0;
 		ArrayList<Board> branches = new ArrayList<Board>();
 		branches.addAll(state.movePawns(!white));
 		branches.addAll(state.moveKnights(white));
@@ -204,10 +200,7 @@ public class Run {
 		branches.addAll(state.moveKings(!white));
 		
 		for (Board move : branches) {
-			val = maxValue(move, white, depth + 1, alpha, beta);
-			if (val < minimum) {
-				minimum = val;
-			}
+			minimum = Math.min(minimum, maxValue(move, white, depth + 1, alpha, beta));
 			if (minimum <= alpha)
 				return minimum;
 			beta = Math.min(beta, minimum);
