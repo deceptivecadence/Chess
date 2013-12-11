@@ -151,7 +151,7 @@ public class Run {
 
 	public static int maxValue(Board state, boolean white, int depth, int alpha, int beta) {
 		int val = state.value(white);
-		if (depth > 4 || val > 5000 || val < -5000) {
+		if (depth > 3 || val > 5000 || val < -5000) {
 			return val;
 		}
 
@@ -175,7 +175,7 @@ public class Run {
 
 	public static int minValue(Board state, boolean white, int depth, int alpha, int beta) {
 		int val = state.value(white);
-		if (depth > 4 || val > 5000 || val < -5000) {
+		if (depth > 3 || val > 5000 || val < -5000) {
 			return val; 
 		}
 
